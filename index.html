@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meridian Strategy Partners — Global Business Development & Market-Entry Strategy</title>
+<meta name="description" content="Meridian Strategy Partners helps founders and investors expand into new markets — strategic business development and go-to-market execution led by operators who've done it.">
+<meta property="og:title" content="Meridian Strategy Partners — Global Business Development & Market-Entry Strategy">
+<meta property="og:description" content="Strategic business development and market-entry execution for founders expanding across borders.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #0B1220;
+    --secondary: #14264D;
+    --background: #F8FAFC;
+    --accent: #2563EB;
+    --surface: #EFF6FF;
+    --annotation: #D97706;
+    --ink: #0B1220;
+    --ink-soft: color-mix(in srgb, var(--ink) 70%, var(--background));
+    --ink-muted: color-mix(in srgb, var(--ink) 45%, var(--background));
+    --line: color-mix(in srgb, var(--ink) 15%, var(--background));
+    --line-strong: color-mix(in srgb, var(--ink) 30%, var(--background));
+    --font-display: 'Fraunces', Georgia, serif;
+    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --r-md: 8px;
+    --r-lg: 14px;
+    --r-xl: 24px;
+    --r-pill: 999px;
+    --shadow-sm: 0 1px 2px color-mix(in srgb, var(--ink) 8%, transparent);
+    --shadow-md: 0 4px 14px color-mix(in srgb, var(--ink) 12%, transparent);
+    --shadow-lg: 0 18px 40px color-mix(in srgb, var(--ink) 18%, transparent);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-body); color: var(--ink); background: var(--background); line-height: 1.5; }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; text-decoration: none; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 32px; }
+
+  /* Nav */
+  header { position: sticky; top: 0; z-index: 50; background: color-mix(in srgb, var(--background) 88%, transparent); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+  nav.wrap { display: flex; align-items: center; justify-content: space-between; height: 76px; }
+  .brand { font-family: var(--font-display); font-weight: 600; font-size: 21px; color: var(--primary); letter-spacing: -0.01em; }
+  .nav-links { display: flex; align-items: center; gap: 36px; }
+  .nav-links a { font-size: 14px; font-weight: 500; color: var(--ink-soft); transition: color .15s; }
+  .nav-links a:hover { color: var(--primary); }
+  .btn { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: 14px; padding: 12px 22px; border-radius: var(--r-pill); transition: all .15s; }
+  .btn-primary { background: var(--accent); color: #fff; box-shadow: var(--shadow-sm); }
+  .btn-primary:hover { background: var(--secondary); box-shadow: var(--shadow-md); }
+  .btn-ghost { color: var(--primary); border: 1px solid var(--line-strong); }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+  @media (max-width: 760px) { .nav-links { display: none; } }
+
+  /* Hero */
+  .hero { padding: 96px 0 80px; }
+  .eyebrow { font-family: var(--font-body); font-size: 13px; letter-spacing: .14em; text-transform: uppercase; font-weight: 600; color: var(--accent); margin-bottom: 20px; }
+  h1.display { font-family: var(--font-display); font-weight: 600; font-size: clamp(36px, 5.4vw, 64px); line-height: 1.05; letter-spacing: -0.02em; color: var(--primary); max-width: 880px; }
+  h1.display em { font-style: italic; color: var(--accent); }
+  .hero-sub { font-size: 19px; color: var(--ink-soft); max-width: 620px; margin-top: 24px; line-height: 1.6; }
+  .hero-ctas { display: flex; gap: 14px; margin-top: 36px; flex-wrap: wrap; }
+
+  .founder-strip { display: flex; align-items: center; gap: 28px; margin-top: 64px; padding-top: 40px; border-top: 1px solid var(--line); flex-wrap: wrap; }
+  .founder-chip { display: flex; align-items: center; gap: 12px; }
+  .founder-chip img, .avatar-placeholder { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; box-shadow: var(--shadow-sm); }
+  .avatar-placeholder { display: flex; align-items: center; justify-content: center; background: var(--secondary); color: #fff; font-family: var(--font-display); font-weight: 600; font-size: 16px; }
+  .founder-chip .name { font-size: 14px; font-weight: 600; color: var(--primary); }
+  .founder-chip .role { font-size: 13px; color: var(--ink-muted); }
+
+  /* Section shells */
+  section { padding: 88px 0; }
+  .section-surface { background: var(--surface); }
+  .section-dark { background: var(--primary); color: #fff; }
+  .section-head { max-width: 640px; margin-bottom: 48px; }
+  .section-head .eyebrow { color: var(--accent); }
+  .section-dark .section-head .eyebrow { color: #7DA8FF; }
+  h2.display { font-family: var(--font-display); font-weight: 600; font-size: clamp(28px, 3.4vw, 40px); line-height: 1.15; letter-spacing: -0.01em; color: var(--primary); }
+  .section-dark h2.display { color: #fff; }
+  .section-lede { font-size: 17px; color: var(--ink-soft); margin-top: 14px; line-height: 1.6; }
+  .section-dark .section-lede { color: rgba(255,255,255,0.72); }
+
+  /* Cards grid */
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .card { background: #fff; border: 1px solid var(--line); border-radius: var(--r-lg); padding: 32px; box-shadow: var(--shadow-sm); transition: box-shadow .15s, transform .15s; }
+  .card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+  .card .num { font-family: var(--font-display); font-size: 15px; color: var(--accent); font-weight: 600; margin-bottom: 16px; }
+  .card h3 { font-family: var(--font-body); font-size: 19px; font-weight: 700; color: var(--primary); margin-bottom: 10px; }
+  .card p { font-size: 15px; color: var(--ink-soft); line-height: 1.6; }
+
+  /* Services */
+  .tiers { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-bottom: 24px; }
+  .tier { background: #fff; border: 1px solid var(--line); border-radius: var(--r-xl); padding: 40px; box-shadow: var(--shadow-sm); }
+  .tier.featured { border-color: var(--accent); box-shadow: var(--shadow-md); position: relative; }
+  .tier-name { font-family: var(--font-display); font-size: 24px; font-weight: 600; color: var(--primary); margin-bottom: 8px; }
+  .tier-desc { font-size: 15px; color: var(--ink-soft); margin-bottom: 20px; }
+  .tier ul { list-style: none; }
+  .tier li { font-size: 14.5px; color: var(--ink-soft); padding: 9px 0; border-top: 1px solid var(--line); display: flex; gap: 10px; }
+  .tier li:first-child { border-top: none; }
+  .tier li::before { content: "→"; color: var(--accent); font-weight: 700; flex-shrink: 0; }
+  .capabilities { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; }
+  .capability { text-align: center; padding: 20px 12px; }
+  .capability .icon { width: 40px; height: 40px; border-radius: 10px; background: var(--surface); color: var(--accent); display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; font-weight: 700; }
+  .capability span { font-size: 13.5px; font-weight: 600; color: var(--ink-soft); }
+  @media (max-width: 900px) { .grid-3, .tiers { grid-template-columns: 1fr; } .capabilities { grid-template-columns: repeat(2, 1fr); } }
+
+  /* Social proof */
+  .logo-strip { display: flex; align-items: center; justify-content: center; gap: 56px; flex-wrap: wrap; padding: 40px 0; opacity: 0.75; }
+  .logo-strip img { height: 26px; width: auto; filter: grayscale(1); }
+
+  /* Founders */
+  .founders-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+  .founder-card { background: #fff; border: 1px solid var(--line); border-radius: var(--r-xl); padding: 40px; box-shadow: var(--shadow-sm); }
+  .founder-photo-lg { width: 96px; height: 96px; border-radius: 50%; object-fit: cover; margin-bottom: 24px; box-shadow: var(--shadow-md); }
+  .avatar-placeholder-lg { width: 96px; height: 96px; border-radius: 50%; background: var(--secondary); color: #fff; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-weight: 600; font-size: 30px; margin-bottom: 24px; }
+  .founder-card h3 { font-family: var(--font-display); font-size: 24px; font-weight: 600; color: var(--primary); margin-bottom: 4px; }
+  .founder-role { font-size: 14px; color: var(--accent); font-weight: 600; margin-bottom: 18px; }
+  .founder-card p { font-size: 15px; color: var(--ink-soft); line-height: 1.65; margin-bottom: 12px; }
+  .placeholder-note { display: inline-block; margin-top: 12px; font-size: 12px; color: var(--annotation); border: 1px dashed var(--annotation); border-radius: var(--r-md); padding: 6px 10px; }
+  @media (max-width: 800px) { .founders-grid { grid-template-columns: 1fr; } }
+
+  /* Contact */
+  .contact-box { background: var(--secondary); border-radius: var(--r-xl); padding: 64px; text-align: center; color: #fff; }
+  .contact-box h2 { color: #fff; }
+  .contact-box .section-lede { color: rgba(255,255,255,0.72); max-width: 520px; margin-left: auto; margin-right: auto; }
+  .contact-ctas { display: flex; gap: 14px; justify-content: center; margin-top: 32px; flex-wrap: wrap; }
+  .contact-box .btn-ghost { color: #fff; border-color: rgba(255,255,255,0.3); }
+  .contact-box .btn-ghost:hover { border-color: #fff; }
+
+  footer { padding: 40px 0; border-top: 1px solid var(--line); }
+  footer .wrap { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+  footer .brand { font-size: 15px; }
+  footer .meta { font-size: 13px; color: var(--ink-muted); }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <span class="brand">Meridian Strategy Partners</span>
+    <div class="nav-links">
+      <a href="#approach">Approach</a>
+      <a href="#services">Services</a>
+      <a href="#proof">Track Record</a>
+      <a href="#founders">Founders</a>
+    </div>
+    <a href="#contact" class="btn btn-primary">Book a call</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <p class="eyebrow">Global Business Development · Market-Entry Strategy</p>
+    <h1 class="display">Expanding into a new market is a strategy problem, <em>not a headcount problem.</em></h1>
+    <p class="hero-sub">Meridian Strategy Partners helps founders and investors enter new markets with the commercial infrastructure, partnerships, and positioning to win — built by operators who've led the expansion themselves, not advised from the sidelines.</p>
+    <div class="hero-ctas">
+      <a href="#contact" class="btn btn-primary">Book a call</a>
+      <a href="#services" class="btn btn-ghost">See how we work</a>
+    </div>
+    <div class="founder-strip">
+      <div class="founder-chip">
+        <img src="assets/ankit-headshot.jpg" alt="Ankit Mishra">
+        <div>
+          <div class="name">Ankit Mishra</div>
+          <div class="role">Co-Founder</div>
+        </div>
+      </div>
+      <div class="founder-chip">
+        <div class="avatar-placeholder">AA</div>
+        <div>
+          <div class="name">Alex Aguirre</div>
+          <div class="role">Co-Founder</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="approach" class="section-surface">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Approach</p>
+      <h2 class="display">Three things have to be true before a market-entry works.</h2>
+      <p class="section-lede">Most expansions fail on commercial execution, not product. We fix the part that's actually broken.</p>
+    </div>
+    <div class="grid-3">
+      <div class="card">
+        <div class="num">01</div>
+        <h3>The right partners</h3>
+        <p>Distribution, channel, and regulatory relationships that would otherwise take years to build from zero.</p>
+      </div>
+      <div class="card">
+        <div class="num">02</div>
+        <h3>A positioning that travels</h3>
+        <p>Messaging and pricing rebuilt for local buyer psychology — not a translated version of the home-market pitch.</p>
+      </div>
+      <div class="card">
+        <div class="num">03</div>
+        <h3>A commercial engine, not a hire</h3>
+        <p>Repeatable go-to-market motion your team can run after we leave — not a dependency on a single BD hire.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Services</p>
+      <h2 class="display">Two ways to work with us.</h2>
+      <p class="section-lede">Both start with the same diagnostic: where is your expansion actually stalling.</p>
+    </div>
+    <div class="tiers">
+      <div class="tier featured">
+        <div class="tier-name">Market-Entry Sprint</div>
+        <p class="tier-desc">A focused 6-week engagement to validate a target market and build the first commercial playbook.</p>
+        <ul>
+          <li>Buyer and regulatory landscape mapping</li>
+          <li>Positioning and pricing localization</li>
+          <li>Partner and channel shortlist with warm intros</li>
+          <li>90-day go-to-market plan</li>
+        </ul>
+      </div>
+      <div class="tier">
+        <div class="tier-name">Fractional BD Partner</div>
+        <p class="tier-desc">Ongoing, embedded business development leadership across one or more markets.</p>
+        <ul>
+          <li>Pipeline build and deal execution</li>
+          <li>Partnership and distribution negotiation</li>
+          <li>Investor and board-level market reporting</li>
+          <li>Hiring plan for the in-market team you'll eventually own</li>
+        </ul>
+      </div>
+    </div>
+    <div class="capabilities">
+      <div class="capability"><div class="icon">GTM</div><span>Go-to-market design</span></div>
+      <div class="capability"><div class="icon">BD</div><span>Partnership development</span></div>
+      <div class="capability"><div class="icon">$</div><span>Pricing strategy</span></div>
+      <div class="capability"><div class="icon">Reg</div><span>Regulatory navigation</span></div>
+      <div class="capability"><div class="icon">PR</div><span>Investor narrative</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="proof" class="section-dark">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Track Record</p>
+      <h2 class="display">Built on real operating experience, not slide-deck theory.</h2>
+    </div>
+    <div class="logo-strip">
+      <img src="assets/logo-forbes.svg" alt="Forbes">
+      <img src="assets/logo-cyclecapital.png" alt="Cycle Capital">
+      <img src="assets/logo-holocene.png" alt="Holocene">
+      <img src="assets/logo-pngme.png" alt="PngMe">
+      <img src="assets/logo-tomocredit.png" alt="Tomo Credit">
+    </div>
+  </div>
+</section>
+
+<section id="founders" class="section-surface">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Founders</p>
+      <h2 class="display">Two operators, one commercial playbook.</h2>
+    </div>
+    <div class="founders-grid">
+      <div class="founder-card">
+        <img class="founder-photo-lg" src="assets/ankit-headshot.jpg" alt="Ankit Mishra">
+        <h3>Ankit Mishra</h3>
+        <p class="founder-role">Co-Founder</p>
+        <p>13+ years across venture, AI strategy, and go-to-market for fintech and cleantech ventures, including commercial expansion across five African markets and market-entry frameworks for fourteen portfolio companies.</p>
+        <p>Published 50+ articles on Forbes with 200k+ views, with regular commentary on CBC, Financial Post, and Ticker News. Toronto-based.</p>
+      </div>
+      <div class="founder-card">
+        <div class="avatar-placeholder-lg">AA</div>
+        <h3>Alex Aguirre</h3>
+        <p class="founder-role">Co-Founder</p>
+        <p>Global entrepreneur and strategic business development consultant, focused on building the partnerships and commercial infrastructure that get new-market expansions off the ground.</p>
+        <span class="placeholder-note">Placeholder bio — replace with Alex's full background and headshot</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="contact-box">
+      <p class="eyebrow" style="color:#7DA8FF;">Let's talk</p>
+      <h2 class="display">Thinking about your next market?</h2>
+      <p class="section-lede">Tell us where you're expanding and what's stalling. We'll tell you honestly whether we can help.</p>
+      <div class="contact-ctas">
+        <a href="mailto:hello@meridianstrategy.partners" class="btn btn-primary">Email us</a>
+        <a href="#" class="btn btn-ghost">Book a call</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span class="brand">Meridian Strategy Partners</span>
+    <span class="meta">© 2026 Meridian Strategy Partners. All rights reserved.</span>
+  </div>
+</footer>
+
+</body>
+</html>
