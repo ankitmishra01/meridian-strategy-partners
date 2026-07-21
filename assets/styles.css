@@ -150,9 +150,8 @@ nav.floatnav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display
 .sig-faces img.l { z-index: 1; }
 .sig-faces .s { margin-left: -26px; }
 .sig-faces .initials { display: flex; align-items: center; justify-content: center; background: var(--secondary); color: #fff; font-family: var(--font-display); font-weight: 600; font-size: 30px; }
-.sig-names { display: flex; margin-top: 4px; }
+.sig-names { display: flex; margin-top: 4px; gap: 10px; }
 .sig-names .nm { width: 100px; text-align: center; font-size: 13px; font-weight: 700; color: var(--primary); }
-.sig-names .nm + .nm { margin-left: -26px; }
 .sig-role { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-muted); font-weight: 600; margin-top: 2px; }
 
 .hero-ask { margin-top: 30px; width: min(600px, 100%); }
