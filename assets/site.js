@@ -78,12 +78,24 @@ function initField(canvasId, dotColor) {
 initField('field', 'rgb(37,99,235)');
 initField('field-dark', 'rgb(125,168,255)');
 
-/* ---------- concierge chat (available site-wide) ---------- */
+/* ---------- concierge chat (available site-wide, bilingual) ---------- */
 const bot = document.getElementById('bot');
 if (bot) {
+  const lang = document.documentElement.lang === 'fr' ? 'fr' : 'en';
+  const strings = {
+    en: {
+      greeting: "Questions about AI strategy, adoption, or how we work? Ask me anything — I'll answer honestly.",
+      error: "Couldn't reach the concierge right now — please try again shortly, or email hello@parallel.ai.",
+    },
+    fr: {
+      greeting: "Des questions sur la stratégie IA, l'adoption ou notre façon de travailler? Demandez-moi n'importe quoi — je répondrai honnêtement.",
+      error: "Impossible de joindre le service en ce moment — veuillez réessayer bientôt, ou écrivez à hello@parallel.ai.",
+    },
+  }[lang];
+
   const botThread = document.getElementById('bot-thread');
   const botInput = document.getElementById('bot-input');
-  const chatHistory = [{ role: 'assistant', text: "Questions about AI strategy, adoption, or how we work? Ask me anything — I'll answer honestly." }];
+  const chatHistory = [{ role: 'assistant', text: strings.greeting }];
 
   document.querySelector('.bot-icon').addEventListener('click', () => bot.classList.add('open'));
   const botClose = document.getElementById('bot-close');
@@ -102,12 +114,12 @@ if (bot) {
     bot.classList.add('open');
     addMsg('user', text);
     chatHistory.push({ role: 'user', text });
-    const thinking = addMsg('assistant', 'Thinking…');
+    const thinking = addMsg('assistant', lang === 'fr' ? 'Réflexion…' : 'Thinking…');
     thinking.classList.add('thinking');
     try {
       const res = await fetch('/api/chat', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ messages: chatHistory }),
+        body: JSON.stringify({ messages: chatHistory, lang }),
       });
       const data = await res.json();
       thinking.remove();
@@ -116,7 +128,7 @@ if (bot) {
       chatHistory.push({ role: 'assistant', text: data.reply });
     } catch (err) {
       thinking.remove();
-      addMsg('assistant', "Couldn't reach the concierge right now — please try again shortly, or email hello@meridianstrategy.partners.");
+      addMsg('assistant', strings.error);
     }
   };
   document.getElementById('bot-send').addEventListener('click', () => { const v = botInput.value.trim(); botInput.value = ''; sendChat(v); });
@@ -143,6 +155,7 @@ const newsForm = document.getElementById('news-form');
 if (newsForm) {
   newsForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    newsForm.innerHTML = '<p style="color:#fff;font-weight:600;font-size:14px;">Thanks — you\'re on the list.</p>';
+    const msg = document.documentElement.lang === 'fr' ? 'Merci — vous êtes inscrit.' : "Thanks — you're on the list.";
+    newsForm.innerHTML = `<p style="color:#fff;font-weight:600;font-size:14px;">${msg}</p>`;
   });
 }

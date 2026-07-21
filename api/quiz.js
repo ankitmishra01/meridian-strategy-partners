@@ -40,10 +40,15 @@ module.exports = async (req, res) => {
     res.status(400).json({ error: 'Expected 4 {question, answer} pairs' });
     return;
   }
+  const lang = body?.lang === 'fr' ? 'fr' : 'en';
 
   const transcript = answers
     .map((a, i) => `Q${i + 1}: ${a.question}\nA${i + 1}: ${a.answer}`)
     .join('\n\n');
+
+  const systemForLang = lang === 'fr'
+    ? `${SYSTEM}\n\nWrite "headline" and "body" in fluent, natural French — not a literal translation. Keep the JSON keys themselves in English exactly as specified ("headline", "body", "scores", "strategy", "adoption", "resourcing", "urgency") — only the headline/body text values should be French.`
+    : SYSTEM;
 
   try {
     const upstream = await fetch(
@@ -52,7 +57,7 @@ module.exports = async (req, res) => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          system_instruction: { parts: [{ text: SYSTEM }] },
+          system_instruction: { parts: [{ text: systemForLang }] },
           contents: [{ role: 'user', parts: [{ text: transcript }] }],
           generationConfig: { temperature: 0.6, responseMimeType: 'application/json', thinkingConfig: { thinkingBudget: 0 } },
         }),

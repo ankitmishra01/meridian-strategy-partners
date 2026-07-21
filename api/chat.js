@@ -60,10 +60,15 @@ module.exports = async (req, res) => {
     res.status(400).json({ error: 'Expected a non-empty messages array' });
     return;
   }
+  const lang = body?.lang === 'fr' ? 'fr' : 'en';
 
   const contents = messages
     .filter((m) => m?.role && m?.text)
     .map((m) => ({ role: m.role === 'assistant' ? 'model' : 'user', parts: [{ text: m.text }] }));
+
+  const systemForLang = lang === 'fr'
+    ? `${SYSTEM}\n\nRespond in French (fluent, natural French — not a literal word-for-word translation). Keep the same tone: plain, honest, declarative. Numbers, the founders' names, and "Parallel AI" stay as-is.`
+    : SYSTEM;
 
   try {
     const upstream = await fetch(
@@ -72,7 +77,7 @@ module.exports = async (req, res) => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          system_instruction: { parts: [{ text: SYSTEM }] },
+          system_instruction: { parts: [{ text: systemForLang }] },
           contents,
           generationConfig: { temperature: 0.5, maxOutputTokens: 400, thinkingConfig: { thinkingBudget: 0 } },
         }),
@@ -86,7 +91,8 @@ module.exports = async (req, res) => {
     }
 
     const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
-    res.status(200).json({ reply: text || "I couldn't generate a reply — try rephrasing that." });
+    const fallback = lang === 'fr' ? "Je n'ai pas pu générer de réponse — essayez de reformuler." : "I couldn't generate a reply — try rephrasing that.";
+    res.status(200).json({ reply: text || fallback });
   } catch (err) {
     res.status(502).json({ error: 'Chat generation failed', detail: String(err) });
   }

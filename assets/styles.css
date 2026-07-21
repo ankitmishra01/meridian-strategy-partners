@@ -109,6 +109,11 @@ nav.floatnav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display
 .nav-links { display: flex; align-items: center; gap: 26px; }
 .nav-links a.navlink { font-size: 14px; font-weight: 600; color: var(--ink-soft); transition: color .15s; }
 .nav-links a.navlink:hover, .nav-links a.navlink.active { color: var(--primary); }
+.lang-toggle { display: flex; align-items: center; gap: 5px; font-family: var(--font-body); font-size: 12.5px; font-weight: 700; flex-shrink: 0; }
+.lang-toggle a { padding: 5px 7px; border-radius: 6px; color: var(--ink-muted); letter-spacing: .02em; }
+.lang-toggle a:hover { color: var(--primary); }
+.lang-toggle a.active { color: var(--primary); background: var(--surface); cursor: default; }
+.lang-toggle span { color: var(--line-strong); }
 .btn { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: 14px; padding: 12px 22px; border-radius: var(--r-pill); transition: all .15s var(--ease); border: none; cursor: pointer; font-family: var(--font-body); }
 .btn-primary { background: var(--accent); color: #fff; box-shadow: var(--shadow-sm); }
 .btn-primary:hover { transform: translateY(-1px); background: var(--secondary); box-shadow: var(--shadow-md); }

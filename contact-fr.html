@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Parallel AI</title>
+<meta name="description" content="Une conversation de 30 minutes sur la stratégie et l'adoption de l'IA. Si Parallel AI n'est pas le bon choix pour vous, nous vous le dirons.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+<nav class="floatnav" id="nav">
+  <div class="nav-pill" id="navpill">
+    <a class="brand" href="index-fr.html">Parallel AI</a>
+    <div class="nav-links">
+      <a class="navlink" href="approach-fr.html">Approche</a>
+      <a class="navlink" href="services-fr.html">Services</a>
+      <a class="navlink" href="readiness-fr.html">Bilan de préparation</a>
+      <a class="navlink" href="founders-fr.html">À propos</a>
+      <a class="navlink" href="clients-fr.html">Clients</a>
+      <a href="contact-fr.html" class="btn btn-primary">Réserver un appel</a>
+    </div>
+    <div class="lang-toggle"><a href="contact.html">EN</a><span>|</span><a href="contact-fr.html" class="active">FR</a></div>
+    <button class="hamburger" id="hamburger" aria-label="Menu"></button>
+  </div>
+</nav>
+
+<section class="ch-hello bg-dark" style="min-height:100vh;display:flex;flex-direction:column;justify-content:center;">
+  <canvas id="field-dark" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div class="hello-avatars reveal">
+      <img src="assets/ankit-headshot.jpg" alt="Ankit Mishra">
+      <div class="initials">AA</div>
+    </div>
+    <p class="eyebrow reveal">Nous contacter</p>
+    <h2 class="reveal">Dites <em>bonjour.</em></h2>
+    <p class="sub reveal">Une conversation de 30 minutes sur la stratégie et l'adoption de l'IA. Si nous ne sommes pas le bon choix pour vous, nous vous le dirons — et vous orienterons ailleurs.</p>
+    <div class="hello-ctas reveal">
+      <a href="mailto:hello@parallel.ai" class="btn btn-primary">Nous écrire</a>
+    </div>
+    <div class="news-strip reveal">
+      <div>
+        <b>Recevez le bulletin sur l'adoption de l'IA</b>
+        <span>Notes occasionnelles · sans battage médiatique</span>
+      </div>
+      <form class="news-form" id="news-form">
+        <input type="email" placeholder="vous@entreprise.com" aria-label="Courriel" required>
+        <button class="btn btn-primary" type="submit">S'abonner</button>
+      </form>
+    </div>
+    <div class="foot">
+      <span>Parallel AI · © 2026</span>
+      <div class="foot-links">
+        <a href="index-fr.html">Accueil</a><a href="approach-fr.html">Approche</a><a href="services-fr.html">Services</a><a href="founders-fr.html">À propos</a><a href="clients-fr.html">Clients</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="bot" id="bot">
+  <span class="bot-icon">💬</span>
+  <div class="bot-head">
+    <span class="dot"></span>
+    <div class="who">Concierge Parallel<span>Assisté par IA, posez vos questions</span></div>
+    <button class="bot-close" id="bot-close">×</button>
+  </div>
+  <div class="bot-panel">
+    <div class="bot-thread" id="bot-thread">
+      <div class="msg bot-m">Des questions sur la stratégie IA, l'adoption ou notre façon de travailler? Demandez-moi n'importe quoi — je répondrai honnêtement.</div>
+    </div>
+    <div class="bot-chips" id="bot-chips">
+      <button class="bot-chip">Quel est le coût d'un mandat?</button>
+      <button class="bot-chip">Pourquoi pas un grand cabinet de conseil?</button>
+      <button class="bot-chip">Puis-je parler à quelqu'un?</button>
+    </div>
+    <div class="bot-input-row">
+      <input type="text" id="bot-input" placeholder="Posez votre question…">
+      <button class="bot-send" id="bot-send">Envoyer</button>
+    </div>
+  </div>
+</div>
+
+<script src="assets/site.js"></script>
+</body>
+</html>
