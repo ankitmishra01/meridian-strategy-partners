@@ -4,12 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Meridian Strategy Partners — Global Business Development & Market-Entry Strategy</title>
-<meta name="description" content="Meridian Strategy Partners helps founders and investors expand into new markets — strategic business development and go-to-market execution led by operators who've done it.">
+<meta name="description" content="Meridian Strategy Partners helps founders and investors expand into new markets — strategic business development and go-to-market execution led by the founders themselves.">
 <meta property="og:title" content="Meridian Strategy Partners — Global Business Development & Market-Entry Strategy">
 <meta property="og:description" content="Strategic business development and market-entry execution for founders expanding across borders.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
     --primary: #0B1220;
@@ -25,285 +25,777 @@
     --line-strong: color-mix(in srgb, var(--ink) 30%, var(--background));
     --font-display: 'Fraunces', Georgia, serif;
     --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    --r-md: 8px;
-    --r-lg: 14px;
-    --r-xl: 24px;
-    --r-pill: 999px;
+    --r-md: 8px; --r-lg: 14px; --r-xl: 24px; --r-pill: 999px;
     --shadow-sm: 0 1px 2px color-mix(in srgb, var(--ink) 8%, transparent);
     --shadow-md: 0 4px 14px color-mix(in srgb, var(--ink) 12%, transparent);
     --shadow-lg: 0 18px 40px color-mix(in srgb, var(--ink) 18%, transparent);
+    --ease: cubic-bezier(0.16, 1, 0.3, 1);
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
-  body { font-family: var(--font-body); color: var(--ink); background: var(--background); line-height: 1.5; }
+  body { font-family: var(--font-body); color: var(--ink); background: var(--background); line-height: 1.5; overflow-x: hidden; }
   img { max-width: 100%; display: block; }
   a { color: inherit; text-decoration: none; }
-  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 32px; }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 32px; }
+  .reveal { opacity: 0; transform: translateY(16px); transition: opacity .6s var(--ease), transform .6s var(--ease); }
+  .reveal.in { opacity: 1; transform: translateY(0); }
 
-  /* Nav */
-  header { position: sticky; top: 0; z-index: 50; background: color-mix(in srgb, var(--background) 88%, transparent); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
-  nav.wrap { display: flex; align-items: center; justify-content: space-between; height: 76px; }
-  .brand { font-family: var(--font-display); font-weight: 600; font-size: 21px; color: var(--primary); letter-spacing: -0.01em; }
-  .nav-links { display: flex; align-items: center; gap: 36px; }
-  .nav-links a { font-size: 14px; font-weight: 500; color: var(--ink-soft); transition: color .15s; }
+  /* ---------- floating pill nav ---------- */
+  nav.floatnav { position: fixed; top: 16px; left: 20px; right: 20px; z-index: 100; display: flex; justify-content: center; pointer-events: none; }
+  .nav-pill { pointer-events: auto; display: flex; align-items: center; justify-content: space-between; gap: 24px; width: 100%; max-width: 1140px;
+    background: color-mix(in srgb, var(--background) 78%, transparent); backdrop-filter: blur(18px) saturate(1.1);
+    border: 1px solid var(--line); border-radius: var(--r-pill); padding: 8px 10px 8px 22px;
+    box-shadow: var(--shadow-md); transition: box-shadow .25s var(--ease); }
+  .nav-pill.solid { box-shadow: var(--shadow-lg); }
+  .brand { font-family: var(--font-display); font-weight: 600; font-size: 18px; color: var(--primary); letter-spacing: -0.01em; }
+  .nav-links { display: flex; align-items: center; gap: 28px; }
+  .nav-links a { font-size: 14px; font-weight: 600; color: var(--ink-soft); transition: opacity .15s; }
   .nav-links a:hover { color: var(--primary); }
-  .btn { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: 14px; padding: 12px 22px; border-radius: var(--r-pill); transition: all .15s; }
+  .btn { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: 14px; padding: 12px 22px; border-radius: var(--r-pill); transition: all .15s var(--ease); border: none; cursor: pointer; font-family: var(--font-body); }
   .btn-primary { background: var(--accent); color: #fff; box-shadow: var(--shadow-sm); }
-  .btn-primary:hover { background: var(--secondary); box-shadow: var(--shadow-md); }
-  .btn-ghost { color: var(--primary); border: 1px solid var(--line-strong); }
+  .btn-primary:hover { transform: translateY(-1px); background: var(--secondary); box-shadow: var(--shadow-md); }
+  .btn-ghost { color: var(--primary); background: transparent; border: 1px solid var(--line-strong); }
   .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
-  @media (max-width: 760px) { .nav-links { display: none; } }
+  .hamburger { display: none; background: none; border: none; cursor: pointer; width: 40px; height: 40px; align-items: center; justify-content: center; }
+  .hamburger::before { content:''; width: 18px; height: 12px; background:
+    linear-gradient(var(--ink), var(--ink)) 0 0/100% 2px no-repeat,
+    linear-gradient(var(--ink), var(--ink)) 0 5px/100% 2px no-repeat,
+    linear-gradient(var(--ink), var(--ink)) 0 10px/100% 2px no-repeat; }
+  @media (max-width: 820px) { .nav-links { display: none; } .hamburger { display: flex; } .nav-pill { position: relative; }
+    .nav-pill.menu-open .nav-links { display: flex; flex-direction: column; align-items: flex-start; gap: 14px; position: absolute; top: calc(100% + 10px); left: 0; right: 0;
+      background: var(--background); border: 1px solid var(--line); border-radius: 16px; padding: 20px 22px; box-shadow: var(--shadow-lg); } }
 
-  /* Hero */
-  .hero { padding: 96px 0 80px; }
-  .eyebrow { font-family: var(--font-body); font-size: 13px; letter-spacing: .14em; text-transform: uppercase; font-weight: 600; color: var(--accent); margin-bottom: 20px; }
-  h1.display { font-family: var(--font-display); font-weight: 600; font-size: clamp(36px, 5.4vw, 64px); line-height: 1.05; letter-spacing: -0.02em; color: var(--primary); max-width: 880px; }
+  /* ---------- hero ---------- */
+  .hero-frame { position: relative; padding: clamp(120px, 15vh, 170px) 0 40px; min-height: min(80vh, 80svh); display: flex; flex-direction: column; justify-content: center; overflow: hidden; }
+  #field { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
+  .hero-inner { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; text-align: center; }
+  .eyebrow { font-size: 13px; letter-spacing: .14em; text-transform: uppercase; font-weight: 700; color: var(--accent); margin-bottom: 18px; }
+  h1.display { font-family: var(--font-display); font-weight: 600; font-size: clamp(38px, 6vw, 72px); line-height: 1.03; letter-spacing: -0.02em; color: var(--primary); max-width: 900px; }
   h1.display em { font-style: italic; color: var(--accent); }
-  .hero-sub { font-size: 19px; color: var(--ink-soft); max-width: 620px; margin-top: 24px; line-height: 1.6; }
-  .hero-ctas { display: flex; gap: 14px; margin-top: 36px; flex-wrap: wrap; }
+  .hero-sub { font-size: 18px; color: var(--ink-soft); max-width: 560px; margin: 20px auto 0; line-height: 1.6; }
 
-  .founder-strip { display: flex; align-items: center; gap: 28px; margin-top: 64px; padding-top: 40px; border-top: 1px solid var(--line); flex-wrap: wrap; }
-  .founder-chip { display: flex; align-items: center; gap: 12px; }
-  .founder-chip img, .avatar-placeholder { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; box-shadow: var(--shadow-sm); }
-  .avatar-placeholder { display: flex; align-items: center; justify-content: center; background: var(--secondary); color: #fff; font-family: var(--font-display); font-weight: 600; font-size: 16px; }
-  .founder-chip .name { font-size: 14px; font-weight: 600; color: var(--primary); }
-  .founder-chip .role { font-size: 13px; color: var(--ink-muted); }
+  /* founder signature lockup */
+  .sig-lockup { margin-top: 32px; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+  .sig-faces { display: flex; align-items: center; }
+  .sig-faces img, .sig-faces .initials { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 2px solid var(--primary); box-shadow: 0 0 0 5px var(--background); }
+  .sig-faces img.l { z-index: 1; }
+  .sig-faces .s { margin-left: -26px; }
+  .sig-faces .initials { display: flex; align-items: center; justify-content: center; background: var(--secondary); color: #fff; font-family: var(--font-display); font-weight: 600; font-size: 30px; }
+  .sig-names { display: flex; margin-top: 4px; }
+  .sig-names .nm { width: 100px; text-align: center; font-size: 13px; font-weight: 700; color: var(--primary); }
+  .sig-names .nm + .nm { margin-left: -26px; }
+  .sig-role { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-muted); font-weight: 600; margin-top: 2px; }
 
-  /* Section shells */
-  section { padding: 88px 0; }
-  .section-surface { background: var(--surface); }
-  .section-dark { background: var(--primary); color: #fff; }
-  .section-head { max-width: 640px; margin-bottom: 48px; }
-  .section-head .eyebrow { color: var(--accent); }
-  .section-dark .section-head .eyebrow { color: #7DA8FF; }
-  h2.display { font-family: var(--font-display); font-weight: 600; font-size: clamp(28px, 3.4vw, 40px); line-height: 1.15; letter-spacing: -0.01em; color: var(--primary); }
-  .section-dark h2.display { color: #fff; }
-  .section-lede { font-size: 17px; color: var(--ink-soft); margin-top: 14px; line-height: 1.6; }
-  .section-dark .section-lede { color: rgba(255,255,255,0.72); }
+  /* ask bar */
+  .hero-ask { margin-top: 30px; width: min(600px, 100%); }
+  .askbar { display: flex; align-items: center; gap: 8px; background: #fff; border-radius: var(--r-pill); padding: 6px 6px 6px 22px; box-shadow: var(--shadow-md); }
+  .askbar:focus-within { box-shadow: var(--shadow-lg); }
+  .askbar input { flex: 1; border: none; outline: none; background: transparent; font-size: 16px; font-weight: 600; color: var(--ink); padding: 13px 0; min-width: 0; }
+  .askbar input::placeholder { color: var(--ink-muted); }
+  .askbar button { background: var(--accent); color: #fff; border: none; border-radius: var(--r-pill); font-weight: 600; font-size: 14px; padding: 12px 22px; cursor: pointer; transition: transform .15s var(--ease), background .15s; }
+  .askbar button:hover { transform: translateY(-1px); background: var(--secondary); }
+  .ask-chips { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 16px; max-width: 720px; }
+  .ask-chip { font-size: 13.5px; font-weight: 600; color: var(--ink); background: #fff; border: 1px solid var(--line); border-radius: var(--r-pill); padding: 10px 18px; cursor: pointer; box-shadow: var(--shadow-sm); transition: all .15s var(--ease); }
+  .ask-chip:hover { background: var(--primary); color: #fff; transform: translateY(-2px); }
 
-  /* Cards grid */
-  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-  .card { background: #fff; border: 1px solid var(--line); border-radius: var(--r-lg); padding: 32px; box-shadow: var(--shadow-sm); transition: box-shadow .15s, transform .15s; }
-  .card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
-  .card .num { font-family: var(--font-display); font-size: 15px; color: var(--accent); font-weight: 600; margin-bottom: 16px; }
-  .card h3 { font-family: var(--font-body); font-size: 19px; font-weight: 700; color: var(--primary); margin-bottom: 10px; }
-  .card p { font-size: 15px; color: var(--ink-soft); line-height: 1.6; }
+  /* ---------- credibility strip + marquee ---------- */
+  .cred { background: var(--surface); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 44px 0 40px; }
+  .cred-inner { display: flex; flex-direction: column; align-items: center; gap: 18px; text-align: center; }
+  .cred-line { font-size: 15px; font-weight: 600; color: var(--ink-soft); letter-spacing: -0.005em; }
+  .cred-line b { color: var(--primary); font-weight: 700; }
+  .credmarq { width: 100%; overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); }
+  .credtrack { display: flex; align-items: center; gap: 72px; width: max-content; animation: marq 60s linear infinite; }
+  .credmarq:hover .credtrack { animation-play-state: paused; }
+  @keyframes marq { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  .lg-item img { height: 24px; width: auto; max-width: 150px; object-fit: contain; filter: grayscale(1); opacity: .7; transition: all .2s; }
+  .lg-item:hover img { filter: grayscale(0); opacity: 1; }
 
-  /* Services */
-  .tiers { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-bottom: 24px; }
-  .tier { background: #fff; border: 1px solid var(--line); border-radius: var(--r-xl); padding: 40px; box-shadow: var(--shadow-sm); }
-  .tier.featured { border-color: var(--accent); box-shadow: var(--shadow-md); position: relative; }
-  .tier-name { font-family: var(--font-display); font-size: 24px; font-weight: 600; color: var(--primary); margin-bottom: 8px; }
-  .tier-desc { font-size: 15px; color: var(--ink-soft); margin-bottom: 20px; }
-  .tier ul { list-style: none; }
-  .tier li { font-size: 14.5px; color: var(--ink-soft); padding: 9px 0; border-top: 1px solid var(--line); display: flex; gap: 10px; }
-  .tier li:first-child { border-top: none; }
-  .tier li::before { content: "→"; color: var(--accent); font-weight: 700; flex-shrink: 0; }
-  .capabilities { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; }
-  .capability { text-align: center; padding: 20px 12px; }
-  .capability .icon { width: 40px; height: 40px; border-radius: 10px; background: var(--surface); color: var(--accent); display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; font-weight: 700; }
-  .capability span { font-size: 13.5px; font-weight: 600; color: var(--ink-soft); }
-  @media (max-width: 900px) { .grid-3, .tiers { grid-template-columns: 1fr; } .capabilities { grid-template-columns: repeat(2, 1fr); } }
+  /* ---------- chapter shell ---------- */
+  .chapter { padding: 110px 0 100px; position: relative; }
+  .chapter.tight { padding-top: 20px; }
+  .ch-head { font-family: var(--font-display); font-weight: 600; font-size: clamp(30px, 4vw, 48px); letter-spacing: -0.02em; line-height: 1.1; max-width: 820px; color: var(--primary); }
+  .ch-head em { font-style: italic; color: var(--accent); }
+  .ch-sub { margin-top: 16px; font-size: 16px; color: var(--ink-soft); max-width: 600px; font-weight: 500; }
 
-  /* Social proof */
-  .logo-strip { display: flex; align-items: center; justify-content: center; gap: 56px; flex-wrap: wrap; padding: 40px 0; opacity: 0.75; }
-  .logo-strip img { height: 26px; width: auto; filter: grayscale(1); }
+  /* three pillars */
+  .doors { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 48px; }
+  .door { background: #fff; border-radius: var(--r-lg); padding: 32px 30px 28px; display: flex; flex-direction: column; gap: 14px; position: relative;
+    box-shadow: var(--shadow-sm); transition: transform .2s var(--ease), box-shadow .2s var(--ease); }
+  .door:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+  .door .d-ind { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); font-weight: 700; }
+  .door h3 { font-family: var(--font-display); font-weight: 600; font-size: 25px; letter-spacing: -0.005em; line-height: 1.15; color: var(--primary); }
+  .door p { font-size: 14.5px; color: var(--ink-soft); line-height: 1.6; flex: 1; }
+  @media (max-width: 900px) { .doors { grid-template-columns: 1fr; } }
 
-  /* Founders */
-  .founders-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
-  .founder-card { background: #fff; border: 1px solid var(--line); border-radius: var(--r-xl); padding: 40px; box-shadow: var(--shadow-sm); }
-  .founder-photo-lg { width: 96px; height: 96px; border-radius: 50%; object-fit: cover; margin-bottom: 24px; box-shadow: var(--shadow-md); }
-  .avatar-placeholder-lg { width: 96px; height: 96px; border-radius: 50%; background: var(--secondary); color: #fff; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-weight: 600; font-size: 30px; margin-bottom: 24px; }
-  .founder-card h3 { font-family: var(--font-display); font-size: 24px; font-weight: 600; color: var(--primary); margin-bottom: 4px; }
-  .founder-role { font-size: 14px; color: var(--accent); font-weight: 600; margin-bottom: 18px; }
-  .founder-card p { font-size: 15px; color: var(--ink-soft); line-height: 1.65; margin-bottom: 12px; }
-  .placeholder-note { display: inline-block; margin-top: 12px; font-size: 12px; color: var(--annotation); border: 1px dashed var(--annotation); border-radius: var(--r-md); padding: 6px 10px; }
-  @media (max-width: 800px) { .founders-grid { grid-template-columns: 1fr; } }
+  /* ---------- diagnostic quiz ---------- */
+  .ch-diag { background: #fff; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .diag-cols { display: grid; grid-template-columns: 1fr 1.3fr; gap: 60px; align-items: start; margin-top: 12px; }
+  .diag-left { position: sticky; top: 120px; }
+  .stage-dots { display: flex; gap: 8px; margin-top: 26px; }
+  .stage-dots .sd { width: 32px; height: 5px; border-radius: 3px; background: var(--line); transition: background .3s; }
+  .stage-dots .sd.done { background: var(--accent); }
+  .iv-surface { background: var(--surface); border-radius: var(--r-lg); padding: 24px; box-shadow: var(--shadow-sm); }
+  .iv-head { display: flex; align-items: center; gap: 12px; border-bottom: 1px solid var(--line); padding-bottom: 16px; margin-bottom: 18px; }
+  .iv-head .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); animation: pulse 2.2s ease-in-out infinite; flex-shrink: 0; }
+  @keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(37,99,235,.5); } 50% { box-shadow: 0 0 0 6px rgba(37,99,235,0); } }
+  .iv-head .who { font-size: 14px; font-weight: 700; color: var(--primary); }
+  .iv-head .who span { display: block; font-size: 12px; font-weight: 600; color: var(--ink-muted); letter-spacing: .06em; text-transform: uppercase; margin-top: 2px; }
+  .iv-q { font-size: 17px; font-weight: 600; color: var(--primary); line-height: 1.5; margin-bottom: 18px; }
+  .iv-chips { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 16px; }
+  .iv-chip { font-size: 14px; font-weight: 600; color: var(--ink); background: #fff; border: 1px solid var(--line); border-radius: var(--r-pill); padding: 11px 18px; cursor: pointer; text-align: left; transition: all .15s var(--ease); }
+  .iv-chip:hover { background: var(--surface); border-color: var(--accent); transform: translateY(-2px); }
+  .iv-inputrow { display: flex; align-items: center; gap: 10px; background: #fff; border-radius: var(--r-pill); padding: 5px 5px 5px 18px; box-shadow: var(--shadow-sm); }
+  .iv-inputrow input { flex: 1; border: none; outline: none; background: transparent; font-size: 15px; color: var(--ink); padding: 11px 0; min-width: 0; font-family: var(--font-body); }
+  .iv-inputrow button { background: var(--accent); color: #fff; border: none; border-radius: var(--r-pill); font-weight: 600; font-size: 14px; padding: 10px 20px; cursor: pointer; }
+  .iv-progress { font-size: 13px; color: var(--ink-muted); margin-top: 12px; font-weight: 600; }
+  .diag-result { display: none; margin-top: 24px; }
+  .diag-result.show { display: block; }
+  .diag-result h3 { font-family: var(--font-display); font-weight: 600; font-size: clamp(24px, 2.6vw, 32px); color: var(--primary); margin-bottom: 16px; line-height: 1.2; }
+  .scan-bars { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 28px; margin-bottom: 22px; }
+  .sbar .row { display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 13px; font-weight: 600; color: var(--ink-soft); text-transform: uppercase; letter-spacing: .08em; }
+  .sbar .track { height: 6px; background: var(--surface); border-radius: 3px; overflow: hidden; }
+  .sbar .fill { height: 100%; width: 0%; background: var(--accent); border-radius: 3px; transition: width .9s var(--ease); }
+  .diag-body { font-size: 15.5px; line-height: 1.7; color: var(--ink-soft); border-left: 3px solid var(--accent); padding-left: 18px; max-width: 560px; }
+  .diag-loading { font-size: 14px; color: var(--ink-muted); font-weight: 600; }
+  @media (max-width: 900px) { .diag-cols { grid-template-columns: 1fr; gap: 40px; } .diag-left { position: static; } }
 
-  /* Contact */
-  .contact-box { background: var(--secondary); border-radius: var(--r-xl); padding: 64px; text-align: center; color: #fff; }
-  .contact-box h2 { color: #fff; }
-  .contact-box .section-lede { color: rgba(255,255,255,0.72); max-width: 520px; margin-left: auto; margin-right: auto; }
-  .contact-ctas { display: flex; gap: 14px; justify-content: center; margin-top: 32px; flex-wrap: wrap; }
-  .contact-box .btn-ghost { color: #fff; border-color: rgba(255,255,255,0.3); }
-  .contact-box .btn-ghost:hover { border-color: #fff; }
+  /* ---------- offers ---------- */
+  .pair { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 48px; }
+  .offer { background: #fff; border-radius: var(--r-xl); padding: 44px 40px 38px; display: flex; flex-direction: column; gap: 14px; position: relative;
+    box-shadow: var(--shadow-sm); transition: transform .2s var(--ease), box-shadow .2s var(--ease); }
+  .offer:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+  .offer.lead { background: var(--primary); color: #fff; }
+  .offer .o-step { font-size: 13px; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: .1em; }
+  .offer.lead .o-step { color: #7DA8FF; }
+  .offer h3 { font-family: var(--font-display); font-weight: 600; font-size: clamp(24px, 2.6vw, 32px); letter-spacing: -0.01em; color: var(--primary); }
+  .offer.lead h3 { color: #fff; }
+  .offer .o-tag { font-weight: 700; font-size: 18px; color: var(--ink-soft); }
+  .offer.lead .o-tag { color: rgba(255,255,255,0.8); }
+  .offer p.o-pain, .offer p.o-outcome { font-size: 15px; line-height: 1.65; color: var(--ink-soft); }
+  .offer.lead p.o-pain, .offer.lead p.o-outcome { color: rgba(255,255,255,0.75); }
+  .offer .o-meta { border-top: 1px solid var(--line); padding-top: 16px; margin-top: 4px; font-size: 13px; font-weight: 700; color: var(--ink-soft); }
+  .offer.lead .o-meta { border-top-color: rgba(255,255,255,0.2); color: rgba(255,255,255,0.8); }
+  .badge { position: absolute; top: -14px; right: 28px; font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #fff; background: var(--accent); padding: 6px 14px; border-radius: var(--r-pill); box-shadow: var(--shadow-sm); }
+  @media (max-width: 900px) { .pair { grid-template-columns: 1fr; } }
 
-  footer { padding: 40px 0; border-top: 1px solid var(--line); }
-  footer .wrap { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
-  footer .brand { font-size: 15px; }
-  footer .meta { font-size: 13px; color: var(--ink-muted); }
+  .capabilities { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin-top: 40px; }
+  .capability { background: #fff; border-radius: var(--r-lg); padding: 22px 16px; text-align: center; box-shadow: var(--shadow-sm); }
+  .capability .icon { width: 38px; height: 38px; border-radius: 10px; background: var(--surface); color: var(--accent); display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; font-weight: 700; font-size: 12px; }
+  .capability h4 { font-size: 14px; font-weight: 700; color: var(--primary); margin-bottom: 4px; }
+  .capability p { font-size: 12.5px; color: var(--ink-soft); line-height: 1.4; }
+  @media (max-width: 900px) { .capabilities { grid-template-columns: repeat(2, 1fr); } }
+
+  /* ---------- ROI tiers (dark band) ---------- */
+  .roi { background: var(--primary); color: #fff; }
+  .roi .ch-head, .roi .ch-head em { color: #fff; }
+  .roi .ch-head .hl { background: var(--accent); padding: 0 .1em; }
+  .roi .ch-sub { color: rgba(255,255,255,0.7); }
+  .pg-grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 40px; }
+  .tier-box { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.14); border-radius: var(--r-lg); padding: 26px 24px; position: relative; }
+  .tier-box .tb-n { position: absolute; top: 18px; right: 22px; font-family: var(--font-display); font-weight: 600; font-size: 34px; color: rgba(255,255,255,0.14); }
+  .tier-box .tb-k { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,0.5); font-weight: 700; }
+  .tier-box h3 { font-family: var(--font-display); font-weight: 600; font-size: 20px; color: #fff; margin: 4px 0; }
+  .tier-box p { color: rgba(255,255,255,0.65); font-size: 14.5px; line-height: 1.6; }
+  .tier-box.t3 { background: rgba(37,99,235,0.14); border-color: var(--accent); }
+  .tier-box.t3 .tb-k { color: #7DA8FF; }
+  @media (max-width: 860px) { .pg-grid3 { grid-template-columns: 1fr; } }
+
+  /* ---------- trust (honest, no fabricated quotes) ---------- */
+  .trust-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 44px; }
+  .trust-card { background: #fff; border-radius: var(--r-lg); padding: 28px; box-shadow: var(--shadow-sm); }
+  .trust-card h4 { font-family: var(--font-display); font-weight: 600; font-size: 19px; color: var(--primary); margin-bottom: 10px; }
+  .trust-card p { font-size: 14.5px; color: var(--ink-soft); line-height: 1.6; }
+  @media (max-width: 900px) { .trust-grid { grid-template-columns: 1fr; } }
+
+  /* ---------- letter ---------- */
+  .ch-letter { background: #fff; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .letter-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 70px; align-items: start; }
+  .letter { font-family: var(--font-display); font-size: 19px; line-height: 1.75; font-weight: 400; color: var(--primary); max-width: 620px; }
+  .letter p { margin-bottom: 22px; }
+  .letter em { font-style: italic; color: var(--accent); }
+  .signatures { margin-top: 32px; display: flex; align-items: center; gap: 20px; }
+  .sig-name { font-family: var(--font-display); font-style: italic; font-weight: 600; font-size: 24px; color: var(--primary); }
+  .sig-meta { font-size: 12px; color: var(--ink-muted); letter-spacing: .1em; text-transform: uppercase; line-height: 1.8; }
+  .founder-photos { display: flex; gap: 20px; margin-bottom: 30px; }
+  .fp { flex: 1; }
+  .fp img, .fp .initials-lg { width: 100%; aspect-ratio: 4/5; object-fit: cover; border-radius: var(--r-lg); box-shadow: var(--shadow-md); }
+  .fp .initials-lg { display: flex; align-items: center; justify-content: center; background: var(--secondary); color: #fff; font-family: var(--font-display); font-weight: 600; font-size: 40px; }
+  .fp .cap { font-size: 13px; font-weight: 700; color: var(--ink-soft); text-align: center; margin-top: 10px; }
+  .placeholder-note { display: inline-block; margin-top: 8px; font-size: 12px; color: var(--annotation); border: 1px dashed var(--annotation); border-radius: var(--r-md); padding: 5px 10px; }
+  @media (max-width: 860px) { .letter-grid { grid-template-columns: 1fr; gap: 44px; } }
+
+  /* ---------- articles ---------- */
+  .arts-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 44px; }
+  .art { background: #fff; border-radius: var(--r-lg); overflow: hidden; box-shadow: var(--shadow-sm); transition: transform .2s var(--ease), box-shadow .2s var(--ease); display: flex; flex-direction: column; }
+  .art:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+  .a-cover { height: 8px; background: var(--accent); }
+  .a-cover.m2 { background: var(--annotation); }
+  .a-cover.m3 { background: var(--secondary); }
+  .a-body { padding: 24px 26px 26px; display: flex; flex-direction: column; gap: 12px; flex: 1; }
+  .a-chip { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--accent); }
+  .art h3 { font-family: var(--font-display); font-weight: 600; font-size: 19px; line-height: 1.3; color: var(--primary); }
+  .art p { font-size: 14px; color: var(--ink-soft); line-height: 1.6; flex: 1; }
+  .art .a-meta { font-size: 13px; font-weight: 700; color: var(--accent); border-top: 1px solid var(--line); padding-top: 14px; }
+  @media (max-width: 900px) { .arts-grid { grid-template-columns: 1fr; } }
+
+  /* ---------- closing / footer ---------- */
+  .ch-hello { background: var(--primary); color: #fff; padding: 130px 0 0; text-align: center; position: relative; overflow: hidden; }
+  #field-dark { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
+  .ch-hello .wrap { position: relative; z-index: 1; }
+  .hello-avatars { display: flex; justify-content: center; margin-bottom: 18px; }
+  .hello-avatars img, .hello-avatars .initials { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; border: 3px solid var(--accent); }
+  .hello-avatars img:first-child { margin-right: -14px; z-index: 1; position: relative; }
+  .hello-avatars .initials { display: flex; align-items: center; justify-content: center; background: var(--secondary); color: #fff; font-family: var(--font-display); font-weight: 600; font-size: 22px; }
+  .ch-hello h2 { font-family: var(--font-display); font-weight: 600; font-size: clamp(42px, 7vw, 88px); letter-spacing: -0.02em; line-height: 1.02; }
+  .ch-hello h2 em { font-style: italic; color: var(--accent); }
+  .ch-hello .sub { max-width: 480px; margin: 20px auto 0; color: rgba(255,255,255,0.68); font-size: 16px; line-height: 1.6; }
+  .hello-ctas { margin-top: 36px; }
+  .news-strip { margin-top: 90px; border-top: 1px solid rgba(255,255,255,0.15); padding: 36px 0; display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; text-align: left; }
+  .news-strip b { font-family: var(--font-display); font-weight: 600; font-size: 20px; display: block; }
+  .news-strip span { font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,0.55); display: block; margin-top: 6px; }
+  .news-form { display: flex; gap: 10px; flex-wrap: wrap; }
+  .news-form input { font-size: 14px; padding: 12px 16px; width: 220px; border: 1px solid rgba(255,255,255,0.3); border-radius: var(--r-pill); background: transparent; color: #fff; outline: none; font-family: var(--font-body); }
+  .news-form input::placeholder { color: rgba(255,255,255,0.5); }
+  .foot { border-top: 1px solid rgba(255,255,255,0.15); padding: 28px 0 36px; display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; font-size: 13px; color: rgba(255,255,255,0.55); }
+  .foot-links { display: flex; gap: 22px; }
+  .foot-links a { color: rgba(255,255,255,0.7); font-weight: 600; }
+  .foot-links a:hover { color: #fff; }
+
+  /* ---------- concierge widget ---------- */
+  .bot { position: fixed; bottom: 24px; right: 24px; z-index: 200; width: 60px; height: 60px; border-radius: 50%; background: var(--primary); color: #fff;
+    display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: var(--shadow-lg); transition: all .3s var(--ease); font-size: 24px; }
+  .bot.open { width: 360px; height: 480px; border-radius: 18px; align-items: stretch; justify-content: flex-start; flex-direction: column; background: #fff; cursor: default; }
+  .bot-head { display: none; align-items: center; gap: 10px; padding: 14px 16px; border-bottom: 1px solid var(--line); }
+  .bot.open .bot-head { display: flex; }
+  .bot-head .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); animation: pulse 2.2s ease-in-out infinite; }
+  .bot-head .who { flex: 1; font-size: 13px; font-weight: 700; color: var(--primary); }
+  .bot-head .who span { display: block; font-size: 11px; font-weight: 600; color: var(--ink-muted); text-transform: uppercase; letter-spacing: .08em; }
+  .bot-close { background: none; border: none; color: var(--ink-muted); font-size: 18px; cursor: pointer; }
+  .bot-icon { display: block; }
+  .bot.open .bot-icon { display: none; }
+  .bot-panel { display: none; flex-direction: column; flex: 1; min-height: 0; }
+  .bot.open .bot-panel { display: flex; }
+  .bot-thread { flex: 1; overflow-y: auto; padding: 14px 16px; display: flex; flex-direction: column; gap: 10px; }
+  .msg { font-size: 13.5px; line-height: 1.55; max-width: 88%; padding: 10px 14px; border-radius: 12px; }
+  .msg.bot-m { background: var(--surface); color: var(--ink); align-self: flex-start; border-bottom-left-radius: 4px; }
+  .msg.user-m { background: var(--primary); color: #fff; align-self: flex-end; border-bottom-right-radius: 4px; }
+  .msg.thinking { font-size: 12px; color: var(--ink-muted); background: transparent; padding: 4px 2px; }
+  .bot-chips { padding: 0 16px 10px; display: flex; flex-wrap: wrap; gap: 6px; }
+  .bot-chip { font-size: 11.5px; color: var(--ink); border: 1px solid var(--line); border-radius: var(--r-pill); background: #fff; padding: 6px 11px; cursor: pointer; }
+  .bot-chip:hover { background: var(--surface); }
+  .bot-input-row { border-top: 1px solid var(--line); padding: 10px 12px; display: flex; gap: 8px; }
+  .bot-input-row input { flex: 1; border: none; outline: none; background: transparent; font-size: 13.5px; color: var(--ink); font-family: var(--font-body); }
+  .bot-send { background: var(--accent); border: none; border-radius: var(--r-pill); font-size: 12px; font-weight: 700; padding: 8px 14px; cursor: pointer; color: #fff; }
+  @media (max-width: 480px) { .bot.open { width: calc(100vw - 32px); right: 16px; } }
 </style>
 </head>
 <body>
 
-<header>
-  <nav class="wrap">
+<script>document.documentElement.classList.add('js');</script>
+
+<nav class="floatnav" id="nav">
+  <div class="nav-pill" id="navpill">
     <span class="brand">Meridian Strategy Partners</span>
     <div class="nav-links">
       <a href="#approach">Approach</a>
+      <a href="#diagnostic">Readiness Check</a>
       <a href="#services">Services</a>
-      <a href="#proof">Track Record</a>
       <a href="#founders">Founders</a>
+      <a href="#contact" class="btn btn-primary">Book a call</a>
     </div>
-    <a href="#contact" class="btn btn-primary">Book a call</a>
-  </nav>
+    <button class="hamburger" id="hamburger" aria-label="Menu"></button>
+  </div>
+</nav>
+
+<header class="hero-frame" id="top">
+  <canvas id="field" aria-hidden="true"></canvas>
+  <div class="hero-inner">
+    <p class="eyebrow reveal">Global Business Development · Market-Entry Strategy</p>
+    <h1 class="display reveal">Expanding into a new market is a strategy problem, <em>not a headcount problem.</em></h1>
+    <p class="hero-sub reveal">Meridian Strategy Partners helps founders and investors enter new markets with the commercial infrastructure, partnerships, and positioning to win — built by operators who've led the expansion themselves.</p>
+    <div class="sig-lockup reveal">
+      <div class="sig-faces">
+        <img class="l" src="assets/ankit-headshot.jpg" alt="Ankit Mishra">
+        <div class="initials s">AA</div>
+      </div>
+      <div class="sig-names">
+        <span class="nm">Ankit Mishra</span>
+        <span class="nm">Alex Aguirre</span>
+      </div>
+      <span class="sig-role">Co-Founders</span>
+    </div>
+    <div class="hero-ask reveal">
+      <div class="askbar">
+        <input type="text" id="hero-ask-input" placeholder="Ask us anything about market entry →" autocomplete="off">
+        <button id="hero-ask-send">Ask</button>
+      </div>
+      <div class="ask-chips">
+        <button class="ask-chip" data-q="We don't have a go-to-market plan for this country — where do we start?">No GTM plan for this market yet</button>
+        <button class="ask-chip" data-q="We have local contacts but no real partnerships — how do we fix that?">Contacts, but no real partnerships</button>
+        <button class="ask-chip" data-q="Our pricing doesn't work for this market — how should we localize it?">Pricing doesn't translate locally</button>
+        <button class="ask-chip" data-q="What does an engagement with Meridian actually cost?">What does this cost?</button>
+      </div>
+    </div>
+  </div>
 </header>
 
-<section class="hero">
-  <div class="wrap">
-    <p class="eyebrow">Global Business Development · Market-Entry Strategy</p>
-    <h1 class="display">Expanding into a new market is a strategy problem, <em>not a headcount problem.</em></h1>
-    <p class="hero-sub">Meridian Strategy Partners helps founders and investors enter new markets with the commercial infrastructure, partnerships, and positioning to win — built by operators who've led the expansion themselves, not advised from the sidelines.</p>
-    <div class="hero-ctas">
-      <a href="#contact" class="btn btn-primary">Book a call</a>
-      <a href="#services" class="btn btn-ghost">See how we work</a>
-    </div>
-    <div class="founder-strip">
-      <div class="founder-chip">
-        <img src="assets/ankit-headshot.jpg" alt="Ankit Mishra">
-        <div>
-          <div class="name">Ankit Mishra</div>
-          <div class="role">Co-Founder</div>
-        </div>
-      </div>
-      <div class="founder-chip">
-        <div class="avatar-placeholder">AA</div>
-        <div>
-          <div class="name">Alex Aguirre</div>
-          <div class="role">Co-Founder</div>
-        </div>
+<section class="cred">
+  <div class="wrap cred-inner">
+    <p class="cred-line reveal">13+ years across venture, GTM, and cross-border expansion — <b>credentials from:</b></p>
+    <div class="credmarq">
+      <div class="credtrack" id="credtrack">
+        <div class="lg-item"><img src="assets/logo-forbes.svg" alt="Forbes"></div>
+        <div class="lg-item"><img src="assets/logo-cyclecapital.png" alt="Cycle Capital"></div>
+        <div class="lg-item"><img src="assets/logo-holocene.png" alt="Holocene"></div>
+        <div class="lg-item"><img src="assets/logo-pngme.png" alt="PngMe"></div>
+        <div class="lg-item"><img src="assets/logo-tomocredit.png" alt="Tomo Credit"></div>
       </div>
     </div>
   </div>
 </section>
 
-<section id="approach" class="section-surface">
+<section class="chapter" id="approach">
   <div class="wrap">
-    <div class="section-head">
-      <p class="eyebrow">Approach</p>
-      <h2 class="display">Three things have to be true before a market-entry works.</h2>
-      <p class="section-lede">Most expansions fail on commercial execution, not product. We fix the part that's actually broken.</p>
-    </div>
-    <div class="grid-3">
-      <div class="card">
-        <div class="num">01</div>
+    <h2 class="ch-head reveal">Three things have to be true <em>before a market-entry works.</em></h2>
+    <p class="ch-sub reveal">Most expansions fail on commercial execution, not product. We fix the part that's actually broken.</p>
+    <div class="doors">
+      <div class="door reveal">
+        <span class="d-ind">01 · Partnerships</span>
         <h3>The right partners</h3>
         <p>Distribution, channel, and regulatory relationships that would otherwise take years to build from zero.</p>
       </div>
-      <div class="card">
-        <div class="num">02</div>
+      <div class="door reveal">
+        <span class="d-ind">02 · Positioning</span>
         <h3>A positioning that travels</h3>
         <p>Messaging and pricing rebuilt for local buyer psychology — not a translated version of the home-market pitch.</p>
       </div>
-      <div class="card">
-        <div class="num">03</div>
-        <h3>A commercial engine, not a hire</h3>
-        <p>Repeatable go-to-market motion your team can run after we leave — not a dependency on a single BD hire.</p>
+      <div class="door reveal">
+        <span class="d-ind">03 · Commercial Engine</span>
+        <h3>A system, not a hire</h3>
+        <p>A repeatable go-to-market motion your team can run after we leave — not a dependency on one BD hire.</p>
       </div>
     </div>
   </div>
 </section>
 
-<section id="services">
+<section class="chapter ch-diag" id="diagnostic">
   <div class="wrap">
-    <div class="section-head">
-      <p class="eyebrow">Services</p>
-      <h2 class="display">Two ways to work with us.</h2>
-      <p class="section-lede">Both start with the same diagnostic: where is your expansion actually stalling.</p>
-    </div>
-    <div class="tiers">
-      <div class="tier featured">
-        <div class="tier-name">Market-Entry Sprint</div>
-        <p class="tier-desc">A focused 6-week engagement to validate a target market and build the first commercial playbook.</p>
-        <ul>
-          <li>Buyer and regulatory landscape mapping</li>
-          <li>Positioning and pricing localization</li>
-          <li>Partner and channel shortlist with warm intros</li>
-          <li>90-day go-to-market plan</li>
-        </ul>
+    <div class="diag-cols">
+      <div class="diag-left reveal">
+        <h2 class="ch-head" style="font-size:clamp(28px,3.4vw,40px);">Four questions. <em>No email.</em></h2>
+        <p class="ch-sub">A short interview, not a form — answer in your own words if you like. We'll give you an honest read on where your expansion actually stands.</p>
+        <div class="stage-dots" id="stage-dots"><span class="sd"></span><span class="sd"></span><span class="sd"></span><span class="sd"></span></div>
       </div>
-      <div class="tier">
-        <div class="tier-name">Fractional BD Partner</div>
-        <p class="tier-desc">Ongoing, embedded business development leadership across one or more markets.</p>
-        <ul>
-          <li>Pipeline build and deal execution</li>
-          <li>Partnership and distribution negotiation</li>
-          <li>Investor and board-level market reporting</li>
-          <li>Hiring plan for the in-market team you'll eventually own</li>
-        </ul>
+      <div class="reveal">
+        <div class="iv-surface" id="quiz-surface">
+          <div class="iv-head">
+            <span class="dot"></span>
+            <div class="who">Meridian's Readiness Check<span>Live, powered by AI — answers inform, don't decide</span></div>
+          </div>
+          <div id="iv-live">
+            <p class="iv-q" id="iv-question"></p>
+            <div class="iv-chips" id="iv-chips"></div>
+            <div class="iv-inputrow">
+              <input type="text" id="iv-input" placeholder="…or answer in your own words" autocomplete="off">
+              <button id="iv-send">Answer</button>
+            </div>
+            <p class="iv-progress" id="iv-progress">Question 1 of 4</p>
+          </div>
+          <div class="diag-loading" id="diag-loading" style="display:none;">Reading your answers…</div>
+          <div class="diag-result" id="diag-result">
+            <h3 id="result-headline"></h3>
+            <div class="scan-bars">
+              <div class="sbar"><div class="row"><span>Positioning</span><span id="val-0">—</span></div><div class="track"><div class="fill" id="dim-0"></div></div></div>
+              <div class="sbar"><div class="row"><span>Partnerships</span><span id="val-1">—</span></div><div class="track"><div class="fill" id="dim-1"></div></div></div>
+              <div class="sbar"><div class="row"><span>Resourcing</span><span id="val-2">—</span></div><div class="track"><div class="fill" id="dim-2"></div></div></div>
+              <div class="sbar"><div class="row"><span>Urgency</span><span id="val-3">—</span></div><div class="track"><div class="fill" id="dim-3"></div></div></div>
+            </div>
+            <p class="diag-body" id="result-body"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="services">
+  <div class="wrap">
+    <h2 class="ch-head reveal">Two ways to <em>work with us.</em></h2>
+    <p class="ch-sub reveal">Both start with the same diagnostic: where your expansion is actually stalling.</p>
+    <div class="pair">
+      <div class="offer lead reveal">
+        <span class="badge">start here</span>
+        <span class="o-step">For the founder & leadership</span>
+        <h3>Market-Entry Sprint</h3>
+        <p class="o-tag">A focused 6-week engagement.</p>
+        <p class="o-pain">You need to validate a target market fast — before capital or runway forces the decision for you.</p>
+        <p class="o-outcome">Buyer and regulatory landscape mapping, positioning and pricing localization, a partner shortlist with warm intros, and a 90-day go-to-market plan.</p>
+        <div class="o-meta">6 weeks · founder-led</div>
+      </div>
+      <div class="offer reveal">
+        <span class="o-step">For the whole organization</span>
+        <h3>Fractional BD Partner</h3>
+        <p class="o-tag">Ongoing, embedded leadership.</p>
+        <p class="o-pain">You've validated the market — now someone needs to own the pipeline and the partnerships full-time, without a full-time hire.</p>
+        <p class="o-outcome">Pipeline build and deal execution, partnership and distribution negotiation, investor-level market reporting, and a hiring plan for the in-market team you'll eventually own.</p>
+        <div class="o-meta">Ongoing · scoped to you</div>
       </div>
     </div>
     <div class="capabilities">
-      <div class="capability"><div class="icon">GTM</div><span>Go-to-market design</span></div>
-      <div class="capability"><div class="icon">BD</div><span>Partnership development</span></div>
-      <div class="capability"><div class="icon">$</div><span>Pricing strategy</span></div>
-      <div class="capability"><div class="icon">Reg</div><span>Regulatory navigation</span></div>
-      <div class="capability"><div class="icon">PR</div><span>Investor narrative</span></div>
+      <div class="capability"><div class="icon">GTM</div><h4>Go-to-market design</h4><p>Channel and launch strategy</p></div>
+      <div class="capability"><div class="icon">BD</div><h4>Partnership development</h4><p>Distribution & channel deals</p></div>
+      <div class="capability"><div class="icon">$</div><h4>Pricing strategy</h4><p>Localized to the buyer</p></div>
+      <div class="capability"><div class="icon">Reg</div><h4>Regulatory navigation</h4><p>Market-entry compliance</p></div>
+      <div class="capability"><div class="icon">PR</div><h4>Investor narrative</h4><p>Board & investor reporting</p></div>
     </div>
   </div>
 </section>
 
-<section id="proof" class="section-dark">
+<section class="chapter roi">
   <div class="wrap">
-    <div class="section-head">
-      <p class="eyebrow">Track Record</p>
-      <h2 class="display">Built on real operating experience, not slide-deck theory.</h2>
-    </div>
-    <div class="logo-strip">
-      <img src="assets/logo-forbes.svg" alt="Forbes">
-      <img src="assets/logo-cyclecapital.png" alt="Cycle Capital">
-      <img src="assets/logo-holocene.png" alt="Holocene">
-      <img src="assets/logo-pngme.png" alt="PngMe">
-      <img src="assets/logo-tomocredit.png" alt="Tomo Credit">
+    <h2 class="ch-head reveal">Where the return <span class="hl">actually comes from.</span></h2>
+    <p class="ch-sub reveal">Most market-entry ROI talk stops at the first tier — the smallest one.</p>
+    <div class="pg-grid3">
+      <div class="tier-box reveal"><span class="tb-n">1</span><span class="tb-k">Tier 1 · Efficiency</span><h3>Faster market entry</h3><p>Real — but the smallest number, and the one every advisor sells.</p></div>
+      <div class="tier-box reveal"><span class="tb-n">2</span><span class="tb-k">Tier 2 · Capacity</span><h3>More markets, same team</h3><p>The same leadership team expanding into two or three markets, not one.</p></div>
+      <div class="tier-box t3 reveal"><span class="tb-n">3</span><span class="tb-k">Tier 3 · New revenue</span><h3>A new revenue line, not a cost center</h3><p>The market you enter becomes a real growth line — not a stretch goal on a slide.</p></div>
     </div>
   </div>
 </section>
 
-<section id="founders" class="section-surface">
+<section class="chapter" id="trust">
   <div class="wrap">
-    <div class="section-head">
-      <p class="eyebrow">Founders</p>
-      <h2 class="display">Two operators, one commercial playbook.</h2>
-    </div>
-    <div class="founders-grid">
-      <div class="founder-card">
-        <img class="founder-photo-lg" src="assets/ankit-headshot.jpg" alt="Ankit Mishra">
-        <h3>Ankit Mishra</h3>
-        <p class="founder-role">Co-Founder</p>
-        <p>13+ years across venture, AI strategy, and go-to-market for fintech and cleantech ventures, including commercial expansion across five African markets and market-entry frameworks for fourteen portfolio companies.</p>
-        <p>Published 50+ articles on Forbes with 200k+ views, with regular commentary on CBC, Financial Post, and Ticker News. Toronto-based.</p>
+    <h2 class="ch-head reveal">Why <em>founder-led</em> matters here.</h2>
+    <p class="ch-sub reveal">Meridian is a new firm. We'd rather tell you why that's the point than invent client quotes to hide it.</p>
+    <div class="trust-grid">
+      <div class="trust-card reveal">
+        <h4>You work with us, not a deck</h4>
+        <p>Every engagement is run by Ankit or Alex directly — the same two people whose names are on the door, not a team assembled after the sales call.</p>
       </div>
-      <div class="founder-card">
-        <div class="avatar-placeholder-lg">AA</div>
-        <h3>Alex Aguirre</h3>
-        <p class="founder-role">Co-Founder</p>
-        <p>Global entrepreneur and strategic business development consultant, focused on building the partnerships and commercial infrastructure that get new-market expansions off the ground.</p>
-        <span class="placeholder-note">Placeholder bio — replace with Alex's full background and headshot</span>
+      <div class="trust-card reveal">
+        <h4>The credentials are real, and checkable</h4>
+        <p>Forbes, Cycle Capital, Holocene, PngMe, and Tomo Credit are real prior engagements — verifiable, not staged logos.</p>
+      </div>
+      <div class="trust-card reveal">
+        <h4>New firm, direct terms</h4>
+        <p>No client roster yet means no legacy overhead either — engagement terms and pricing are built around your timeline, not a standardized retainer.</p>
       </div>
     </div>
   </div>
 </section>
 
-<section id="contact">
+<section class="chapter ch-letter" id="founders">
   <div class="wrap">
-    <div class="contact-box">
-      <p class="eyebrow" style="color:#7DA8FF;">Let's talk</p>
-      <h2 class="display">Thinking about your next market?</h2>
-      <p class="section-lede">Tell us where you're expanding and what's stalling. We'll tell you honestly whether we can help.</p>
-      <div class="contact-ctas">
-        <a href="mailto:hello@meridianstrategy.partners" class="btn btn-primary">Email us</a>
-        <a href="#" class="btn btn-ghost">Book a call</a>
+    <div class="letter-grid">
+      <div class="letter reveal">
+        <p>If you've read this far, you're probably wondering whether to talk to us.</p>
+        <p>Here's the honest version. We're two operators, not a staffed agency — when you hire Meridian, you work with the founders, not a deck handed to junior analysts after the kickoff call. Ankit has spent 13+ years across venture, AI strategy, and go-to-market for fintech and cleantech ventures, including commercial expansion across five African markets. Alex has spent his career as a global entrepreneur and strategic business development consultant, building the partnerships that get new-market expansions off the ground.</p>
+        <p>We won't tell you your expansion will work. We'll tell you honestly what's missing — and if the timing is wrong, <em>we'll say that too.</em></p>
+        <div class="signatures">
+          <span class="sig-name">Ankit Mishra</span>
+          <span class="sig-name">Alex Aguirre</span>
+          <span class="sig-meta">Toronto & Global<br>2026</span>
+        </div>
+      </div>
+      <div class="letter-side reveal">
+        <div class="founder-photos">
+          <div class="fp"><img src="assets/ankit-headshot.jpg" alt="Ankit Mishra"><div class="cap">Ankit — strategy & AI</div></div>
+          <div class="fp">
+            <div class="initials-lg">AA</div>
+            <div class="cap">Alex — business development</div>
+            <span class="placeholder-note">Placeholder — real bio/photo pending</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<footer>
+<section class="chapter arts" id="articles">
   <div class="wrap">
-    <span class="brand">Meridian Strategy Partners</span>
-    <span class="meta">© 2026 Meridian Strategy Partners. All rights reserved.</span>
+    <h2 class="ch-head reveal">How we think, <em>in writing.</em></h2>
+    <p class="ch-sub reveal">A selection of Ankit's published work on Forbes — real pieces, not filler.</p>
+    <div class="arts-grid">
+      <a class="art reveal" href="https://www.forbes.com/sites/ankitmishra/2025/08/06/decarbonizing-the-industrial-sector-can-ai-catalyze-global-progress/" target="_blank" rel="noopener">
+        <div class="a-cover"></div>
+        <div class="a-body">
+          <span class="a-chip">AI & Industry</span>
+          <h3>Decarbonizing The Industrial Sector: Can AI Catalyze Global Progress?</h3>
+          <p>How AI-driven efficiency is reshaping heavy industry's path to net zero.</p>
+          <span class="a-meta">Forbes · Ankit Mishra →</span>
+        </div>
+      </a>
+      <a class="art reveal" href="https://www.forbes.com/sites/ankitmishra/2025/04/28/could-data-centre-demand-spark-a-climate-tech-rebound/" target="_blank" rel="noopener">
+        <div class="a-cover m2"></div>
+        <div class="a-body">
+          <span class="a-chip">Climate Tech</span>
+          <h3>Could Data Centre Demand Spark A Climate Tech Rebound?</h3>
+          <p>Why AI infrastructure growth may be the catalyst climate tech investment needed.</p>
+          <span class="a-meta">Forbes · Ankit Mishra →</span>
+        </div>
+      </a>
+      <a class="art reveal" href="https://www.forbes.com/sites/ankitmishra/2023/10/23/building-greener-cities-climatetechs-important-role-in-ghg-reduction/" target="_blank" rel="noopener">
+        <div class="a-cover m3"></div>
+        <div class="a-body">
+          <span class="a-chip">Cities & Climate</span>
+          <h3>Building Greener Cities: Climate Tech's Important Role In GHG Reduction</h3>
+          <p>What urban decarbonization needs from the next generation of climate technology.</p>
+          <span class="a-meta">Forbes · Ankit Mishra →</span>
+        </div>
+      </a>
+    </div>
   </div>
-</footer>
+</section>
+
+<section class="ch-hello" id="contact">
+  <canvas id="field-dark" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div class="hello-avatars reveal">
+      <img src="assets/ankit-headshot.jpg" alt="Ankit Mishra">
+      <div class="initials">AA</div>
+    </div>
+    <h2 class="reveal">Say <em>hello.</em></h2>
+    <p class="sub reveal">A 30-minute conversation. If we're not the right fit for where you are, we'll tell you.</p>
+    <div class="hello-ctas reveal">
+      <a href="mailto:hello@meridianstrategy.partners" class="btn btn-primary">Email us</a>
+    </div>
+    <div class="news-strip reveal">
+      <div>
+        <b>Get the market-entry brief</b>
+        <span>Occasional notes · no hype</span>
+      </div>
+      <form class="news-form" id="news-form">
+        <input type="email" placeholder="you@company.com" aria-label="Email" required>
+        <button class="btn btn-primary" type="submit">Subscribe</button>
+      </form>
+    </div>
+    <div class="foot">
+      <span>Meridian Strategy Partners · © 2026</span>
+      <div class="foot-links">
+        <a href="#approach">Approach</a><a href="#services">Services</a><a href="#founders">Founders</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="bot" id="bot">
+  <span class="bot-icon">💬</span>
+  <div class="bot-head">
+    <span class="dot"></span>
+    <div class="who">Meridian Concierge<span>AI-assisted, ask anything</span></div>
+    <button class="bot-close" id="bot-close">×</button>
+  </div>
+  <div class="bot-panel">
+    <div class="bot-thread" id="bot-thread">
+      <div class="msg bot-m">Questions about market entry, our services, or how we work? Ask me anything — I'll answer honestly.</div>
+    </div>
+    <div class="bot-chips" id="bot-chips">
+      <button class="bot-chip">What does an engagement cost?</button>
+      <button class="bot-chip">Why not a big-name consultancy?</button>
+      <button class="bot-chip">Can I talk to a human?</button>
+    </div>
+    <div class="bot-input-row">
+      <input type="text" id="bot-input" placeholder="Ask anything…">
+      <button class="bot-send" id="bot-send">Send</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ---------- reveal on scroll ---------- */
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+/* ---------- nav ---------- */
+const navpill = document.getElementById('navpill');
+window.addEventListener('scroll', () => navpill.classList.toggle('solid', window.scrollY > 40), { passive: true });
+document.getElementById('hamburger').addEventListener('click', () => navpill.classList.toggle('menu-open'));
+
+/* ---------- ambient particle field (original, canvas-based) ---------- */
+function initField(canvasId, dotColor) {
+  const canvas = document.getElementById(canvasId);
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let w, h, particles;
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function resize() {
+    w = canvas.width = canvas.offsetWidth;
+    h = canvas.height = canvas.offsetHeight;
+    const count = Math.min(60, Math.floor((w * h) / 22000));
+    particles = Array.from({ length: count }, () => ({
+      x: Math.random() * w, y: Math.random() * h,
+      vx: (Math.random() - 0.5) * 0.25, vy: (Math.random() - 0.5) * 0.25,
+      r: Math.random() * 1.6 + 0.6,
+    }));
+  }
+  function tick() {
+    ctx.clearRect(0, 0, w, h);
+    particles.forEach(p => {
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0 || p.x > w) p.vx *= -1;
+      if (p.y < 0 || p.y > h) p.vy *= -1;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = dotColor;
+      ctx.fill();
+    });
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const a = particles[i], b = particles[j];
+        const d = Math.hypot(a.x - b.x, a.y - b.y);
+        if (d < 110) {
+          ctx.beginPath();
+          ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y);
+          ctx.strokeStyle = dotColor.replace(')', `,${0.12 * (1 - d / 110)})`).replace('rgb', 'rgba');
+          ctx.lineWidth = 1;
+          ctx.stroke();
+        }
+      }
+    }
+    if (!reduced) requestAnimationFrame(tick);
+  }
+  window.addEventListener('resize', resize, { passive: true });
+  resize();
+  tick();
+}
+initField('field', 'rgb(37,99,235)');
+initField('field-dark', 'rgb(125,168,255)');
+
+/* ---------- diagnostic quiz ---------- */
+const QUESTIONS = [
+  { q: "What market are you trying to enter, and what's stopping you right now?", chips: ["We're not sure which market to prioritize", "We know the market, but not how to enter it", "We've tried and it stalled"] },
+  { q: "Do you have real partners or distribution in that market yet?", chips: ["No partners yet", "A few contacts, nothing formal", "Yes, but not enough"] },
+  { q: "How is your team resourced for this expansion right now?", chips: ["No one owns it full-time", "One person, part-time", "We have budget but no plan"] },
+  { q: "What's driving the timeline — board pressure, runway, or competitors?", chips: ["Board/investor pressure", "Runway", "Competitors moving first"] },
+];
+let quizIdx = 0;
+const answers = [];
+const dotsEls = document.querySelectorAll('#stage-dots .sd');
+const qEl = document.getElementById('iv-question');
+const chipsEl = document.getElementById('iv-chips');
+const inputEl = document.getElementById('iv-input');
+const progressEl = document.getElementById('iv-progress');
+const liveEl = document.getElementById('iv-live');
+const loadingEl = document.getElementById('diag-loading');
+const resultEl = document.getElementById('diag-result');
+
+function renderQuestion() {
+  const item = QUESTIONS[quizIdx];
+  qEl.textContent = item.q;
+  chipsEl.innerHTML = '';
+  item.chips.forEach(c => {
+    const b = document.createElement('button');
+    b.className = 'iv-chip'; b.textContent = c;
+    b.addEventListener('click', () => submitAnswer(c));
+    chipsEl.appendChild(b);
+  });
+  progressEl.textContent = `Question ${quizIdx + 1} of ${QUESTIONS.length}`;
+  inputEl.value = '';
+}
+function submitAnswer(text) {
+  if (!text) return;
+  answers.push({ question: QUESTIONS[quizIdx].q, answer: text });
+  dotsEls[quizIdx].classList.add('done');
+  quizIdx++;
+  if (quizIdx < QUESTIONS.length) { renderQuestion(); }
+  else { runDiagnostic(); }
+}
+document.getElementById('iv-send').addEventListener('click', () => submitAnswer(inputEl.value.trim()));
+inputEl.addEventListener('keydown', (e) => { if (e.key === 'Enter') submitAnswer(inputEl.value.trim()); });
+
+async function runDiagnostic() {
+  liveEl.style.display = 'none';
+  loadingEl.style.display = 'block';
+  try {
+    const res = await fetch('/api/quiz', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ answers }),
+    });
+    const data = await res.json();
+    loadingEl.style.display = 'none';
+    if (!res.ok) throw new Error(data.error || 'Diagnostic failed');
+    document.getElementById('result-headline').textContent = data.headline || 'Your read';
+    document.getElementById('result-body').textContent = data.body || '';
+    const dims = ['positioning', 'partnerships', 'resourcing', 'urgency'];
+    dims.forEach((d, i) => {
+      const v = Math.max(0, Math.min(100, Number(data.scores?.[d]) || 0));
+      document.getElementById(`val-${i}`).textContent = v + '%';
+      requestAnimationFrame(() => { document.getElementById(`dim-${i}`).style.width = v + '%'; });
+    });
+    resultEl.classList.add('show');
+  } catch (err) {
+    loadingEl.textContent = "Couldn't reach the diagnostic engine — please try again shortly.";
+    loadingEl.style.display = 'block';
+  }
+}
+renderQuestion();
+
+/* ---------- concierge chat ---------- */
+const bot = document.getElementById('bot');
+const botThread = document.getElementById('bot-thread');
+const botInput = document.getElementById('bot-input');
+const chatHistory = [{ role: 'assistant', text: "Questions about market entry, our services, or how we work? Ask me anything — I'll answer honestly." }];
+
+bot.addEventListener('click', (e) => {
+  if (!bot.classList.contains('open') && e.target === bot) bot.classList.add('open');
+});
+document.querySelector('.bot-icon').addEventListener('click', () => bot.classList.add('open'));
+document.getElementById('bot-close').addEventListener('click', (e) => { e.stopPropagation(); bot.classList.remove('open'); });
+
+function addMsg(role, text) {
+  const div = document.createElement('div');
+  div.className = 'msg ' + (role === 'user' ? 'user-m' : 'bot-m');
+  div.textContent = text;
+  botThread.appendChild(div);
+  botThread.scrollTop = botThread.scrollHeight;
+  return div;
+}
+async function sendChat(text) {
+  if (!text) return;
+  bot.classList.add('open');
+  addMsg('user', text);
+  chatHistory.push({ role: 'user', text });
+  const thinking = addMsg('assistant', 'Thinking…');
+  thinking.classList.add('thinking');
+  try {
+    const res = await fetch('/api/chat', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ messages: chatHistory }),
+    });
+    const data = await res.json();
+    thinking.remove();
+    if (!res.ok) throw new Error(data.error || 'Chat failed');
+    addMsg('assistant', data.reply);
+    chatHistory.push({ role: 'assistant', text: data.reply });
+  } catch (err) {
+    thinking.remove();
+    addMsg('assistant', "Couldn't reach the concierge right now — please try again shortly, or email hello@meridianstrategy.partners.");
+  }
+}
+document.getElementById('bot-send').addEventListener('click', () => { const v = botInput.value.trim(); botInput.value = ''; sendChat(v); });
+botInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') { const v = botInput.value.trim(); botInput.value = ''; sendChat(v); } });
+document.querySelectorAll('.bot-chip').forEach(b => b.addEventListener('click', () => sendChat(b.textContent)));
+
+/* ---------- hero ask bar seeds the concierge ---------- */
+document.querySelectorAll('.ask-chip').forEach(b => b.addEventListener('click', () => sendChat(b.dataset.q)));
+document.getElementById('hero-ask-send').addEventListener('click', () => {
+  const v = document.getElementById('hero-ask-input').value.trim();
+  document.getElementById('hero-ask-input').value = '';
+  sendChat(v);
+});
+document.getElementById('hero-ask-input').addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') { const v = e.target.value.trim(); e.target.value = ''; sendChat(v); }
+});
+
+/* ---------- newsletter (no ESP configured — honest no-op success state) ---------- */
+document.getElementById('news-form').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const form = e.target;
+  form.innerHTML = '<p style="color:#fff;font-weight:600;font-size:14px;">Thanks — you\'re on the list.</p>';
+});
+</script>
 
 </body>
 </html>
