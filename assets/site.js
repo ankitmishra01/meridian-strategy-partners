@@ -76,7 +76,7 @@ const bot = document.getElementById('bot');
 if (bot) {
   const botThread = document.getElementById('bot-thread');
   const botInput = document.getElementById('bot-input');
-  const chatHistory = [{ role: 'assistant', text: "Questions about market entry, AI strategy, or how we work? Ask me anything — I'll answer honestly." }];
+  const chatHistory = [{ role: 'assistant', text: "Questions about AI strategy, adoption, or how we work? Ask me anything — I'll answer honestly." }];
 
   document.querySelector('.bot-icon').addEventListener('click', () => bot.classList.add('open'));
   const botClose = document.getElementById('bot-close');
