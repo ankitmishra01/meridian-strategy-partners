@@ -58,8 +58,12 @@ button { font-family: inherit; cursor: pointer; }
 .section.bg-dark { background: var(--primary); color: #fff; }
 .hairline { height: 1px; background: var(--line); border: 0; }
 
-.reveal { opacity: 0; transform: translateY(16px); transition: opacity .6s var(--ease), transform .6s var(--ease); }
+/* hidden only once JS confirms it can reveal them again — no-JS visitors always see content */
+.js .reveal { opacity: 0; transform: translateY(16px); transition: opacity .6s var(--ease), transform .6s var(--ease); }
 .reveal.in { opacity: 1; transform: translateY(0); }
+@media (prefers-reduced-motion: reduce) {
+  .js .reveal { opacity: 1; transform: none; transition: none; }
+}
 
 /* ---------- type ---------- */
 .eyebrow { font-size: 13px; letter-spacing: .14em; text-transform: uppercase; font-weight: 700; color: var(--accent); margin-bottom: 18px; }
@@ -146,6 +150,8 @@ nav.floatnav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display
 @keyframes marq { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 .lg-item img { height: 40px; width: auto; max-width: 200px; object-fit: contain; filter: grayscale(1); opacity: .75; transition: all .2s; }
 .lg-item:hover img { filter: grayscale(0); opacity: 1; }
+.lg-item .lg-word { font-family: var(--font-display); font-weight: 600; font-size: 22px; letter-spacing: -0.01em; color: var(--ink-soft); opacity: .8; transition: all .2s; white-space: nowrap; }
+.lg-item:hover .lg-word { color: var(--primary); opacity: 1; }
 
 /* ---------- cards: pillars / capabilities / trust ---------- */
 .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 48px; }

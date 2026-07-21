@@ -1,10 +1,17 @@
 document.documentElement.classList.add('js');
 
 /* ---------- reveal on scroll ---------- */
-const io = new IntersectionObserver((entries) => {
-  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
-}, { threshold: 0.12 });
-document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+const revealEls = document.querySelectorAll('.reveal');
+if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  revealEls.forEach(el => el.classList.add('in'));
+} else {
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => io.observe(el));
+  // safety net: never leave content permanently invisible if the observer misses an element
+  window.addEventListener('load', () => setTimeout(() => revealEls.forEach(el => el.classList.add('in')), 2500));
+}
 
 /* ---------- nav ---------- */
 const navpill = document.getElementById('navpill');
