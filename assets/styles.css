@@ -310,6 +310,32 @@ nav.floatnav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display
 .founder-card p { font-size: 14.5px; color: var(--ink-soft); line-height: 1.65; margin-bottom: 10px; }
 @media (max-width: 860px) { .founders-grid { grid-template-columns: 1fr; } }
 
+/* ---------- timeline (year / rail / card) ---------- */
+.timeline { position: relative; margin-top: 44px; }
+.timeline-step { display: grid; grid-template-columns: 112px 34px 1fr; align-items: start; }
+.timeline-yr { font-family: var(--font-display); font-weight: 600; font-size: clamp(26px, 3vw, 38px); line-height: 1; letter-spacing: -0.01em; color: var(--primary); padding-top: 2px; }
+.timeline-yr small { display: block; font-size: 12px; font-weight: 700; color: var(--ink-muted); margin-top: 6px; letter-spacing: .02em; }
+.timeline-rail { position: relative; align-self: stretch; }
+.timeline-rail::before { content: ''; position: absolute; left: 50%; transform: translateX(-50%); width: 2px; background: var(--line); top: 0; bottom: 0; }
+.timeline-step:first-child .timeline-rail::before { top: 16px; }
+.timeline-step:last-child .timeline-rail::before { bottom: calc(100% - 16px); }
+.timeline-dot { position: absolute; left: 50%; top: 16px; transform: translate(-50%, -50%); width: 14px; height: 14px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 5px var(--background), 0 1px 3px rgba(11,18,32,.2); }
+.timeline-step:nth-child(2) .timeline-dot { background: var(--annotation); }
+.timeline-step:nth-child(3) .timeline-dot { background: var(--secondary); }
+.timeline-card { background: #fff; border-radius: var(--r-lg); padding: 22px 24px 24px; margin: 0 0 22px; box-shadow: var(--shadow-sm); }
+.timeline-step:last-child .timeline-card { margin-bottom: 0; }
+.timeline-era { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
+.timeline-step:nth-child(2) .timeline-era { color: var(--annotation); }
+.timeline-step:nth-child(3) .timeline-era { color: var(--secondary); }
+.timeline-card h3 { font-family: var(--font-display); font-weight: 600; font-size: 19px; letter-spacing: -0.005em; color: var(--primary); margin-bottom: 8px; line-height: 1.25; }
+.timeline-card p { font-size: 14.5px; color: var(--ink-soft); line-height: 1.6; }
+@media (max-width: 640px) {
+  .timeline-step { grid-template-columns: 56px 22px 1fr; }
+  .timeline-yr { font-size: 18px; }
+  .timeline-card { padding: 16px 16px 18px; }
+  .timeline-card h3 { font-size: 17px; }
+}
+
 /* ---------- articles ---------- */
 .arts-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 44px; }
 .art { background: #fff; border-radius: var(--r-lg); overflow: hidden; box-shadow: var(--shadow-sm); transition: transform .2s var(--ease), box-shadow .2s var(--ease); display: flex; flex-direction: column; }
