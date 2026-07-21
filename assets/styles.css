@@ -195,6 +195,10 @@ nav.floatnav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display
 .offer.lead .o-tag { color: rgba(255,255,255,0.8); }
 .offer p.o-pain, .offer p.o-outcome { font-size: 15px; line-height: 1.65; color: var(--ink-soft); }
 .offer.lead p.o-pain, .offer.lead p.o-outcome { color: rgba(255,255,255,0.75); }
+.offer .o-inside { font-size: 14px; color: var(--ink-soft); line-height: 1.6; }
+.offer .o-inside span { display: block; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--ink-muted); margin-bottom: 4px; }
+.offer.lead .o-inside { color: rgba(255,255,255,0.75); }
+.offer.lead .o-inside span { color: rgba(255,255,255,0.5); }
 .offer .o-meta { border-top: 1px solid var(--line); padding-top: 16px; margin-top: 4px; font-size: 13px; font-weight: 700; color: var(--ink-soft); }
 .offer.lead .o-meta { border-top-color: rgba(255,255,255,0.2); color: rgba(255,255,255,0.8); }
 .badge { position: absolute; top: -14px; right: 28px; font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #fff; background: var(--accent); padding: 6px 14px; border-radius: var(--r-pill); box-shadow: var(--shadow-sm); }
