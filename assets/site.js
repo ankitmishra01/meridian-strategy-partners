@@ -10,7 +10,7 @@ if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
   }, { threshold: 0.12 });
   revealEls.forEach(el => io.observe(el));
   // safety net: never leave content permanently invisible if the observer misses an element
-  window.addEventListener('load', () => setTimeout(() => revealEls.forEach(el => el.classList.add('in')), 2500));
+  window.addEventListener('load', () => setTimeout(() => revealEls.forEach(el => el.classList.add('in')), 1200));
 }
 
 /* ---------- nav ---------- */

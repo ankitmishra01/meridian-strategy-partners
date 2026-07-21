@@ -16,7 +16,7 @@ How AI fits in: Parallel AI uses AI throughout its own delivery (research, diagn
 Readiness Check) and helps clients build the same — AI accelerates the work, it doesn't replace the
 founders' judgment on strategy and adoption.
 
-Services: the Founder AI Program (founder-led — AI strategy & roadmap, executive AI fluency,
+Services: the Founder AI Program (founder-led — AI strategy & roadmap, executive AI readiness,
 fractional Chief AI Officer) and the Team AI Program (org-wide, ongoing — AI adoption & team
 training plus AI agents & workflow automation). Capabilities span AI strategy & roadmapping,
 adoption & training, agents & workflow automation, AI-powered content & brand, personal AI
