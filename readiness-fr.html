@@ -64,6 +64,15 @@
         </div>
         <p class="diag-body" id="result-body"></p>
         <p style="margin-top:24px;"><a href="services-fr.html" class="btn btn-primary">Voir les services correspondants →</a> &nbsp; <a href="contact-fr.html" class="btn btn-ghost">Nous parler</a></p>
+        <div class="lead-capture" id="lead-capture">
+          <p class="lead-prompt">Souhaitez-vous recevoir ce bilan, ou qu'Ankit ou Alex vous recontacte directement?</p>
+          <div class="iv-inputrow" style="max-width:420px;">
+            <input type="email" id="lead-email" placeholder="vous@entreprise.com" autocomplete="email">
+            <input type="text" id="lead-hp" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;">
+            <button id="lead-send">Envoyer mon bilan</button>
+          </div>
+          <p class="lead-status" id="lead-status"></p>
+        </div>
       </div>
     </div>
   </div>
@@ -144,6 +153,8 @@ function submitAnswer(text) {
 document.getElementById('iv-send').addEventListener('click', () => submitAnswer(inputEl.value.trim()));
 inputEl.addEventListener('keydown', (e) => { if (e.key === 'Enter') submitAnswer(inputEl.value.trim()); });
 
+let lastResult = null;
+
 async function runDiagnostic() {
   liveEl.style.display = 'none';
   loadingEl.style.display = 'block';
@@ -164,11 +175,40 @@ async function runDiagnostic() {
       requestAnimationFrame(() => { document.getElementById(`dim-${i}`).style.width = v + '%'; });
     });
     resultEl.classList.add('show');
+    lastResult = data;
   } catch (err) {
     loadingEl.textContent = "Impossible de joindre le moteur de diagnostic — veuillez réessayer bientôt.";
     loadingEl.style.display = 'block';
   }
 }
+
+const leadEmailEl = document.getElementById('lead-email');
+const leadHpEl = document.getElementById('lead-hp');
+const leadStatusEl = document.getElementById('lead-status');
+document.getElementById('lead-send').addEventListener('click', async () => {
+  const email = leadEmailEl.value.trim();
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    leadStatusEl.textContent = 'Entrez une adresse courriel valide.';
+    return;
+  }
+  leadStatusEl.textContent = 'Envoi…';
+  try {
+    const res = await fetch('/api/lead', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        email,
+        source: 'quiz',
+        lang: 'fr',
+        hp: leadHpEl.value,
+        context: { headline: lastResult?.headline, scores: lastResult?.scores, answers },
+      }),
+    });
+    leadStatusEl.textContent = res.ok ? 'Fait — nous vous recontacterons.' : "Impossible d'envoyer — réessayez bientôt.";
+  } catch {
+    leadStatusEl.textContent = "Impossible d'envoyer — réessayez bientôt.";
+  }
+});
+
 renderQuestion();
 </script>
 </body>

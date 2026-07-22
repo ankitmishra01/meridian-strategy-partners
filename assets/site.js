@@ -109,6 +109,45 @@ if (bot) {
     botThread.scrollTop = botThread.scrollHeight;
     return div;
   }
+
+  const leadStrings = {
+    en: { prompt: 'Want Ankit or Alex to follow up on this directly? Leave your email (optional).', placeholder: 'you@company.com', send: 'Send', invalid: 'Enter a valid email address.', sending: 'Sending…', ok: "Done — we'll follow up.", fail: "Couldn't send that — try again shortly." },
+    fr: { prompt: 'Souhaitez-vous qu’Ankit ou Alex vous recontacte directement? Laissez votre courriel (facultatif).', placeholder: 'vous@entreprise.com', send: 'Envoyer', invalid: 'Entrez une adresse courriel valide.', sending: 'Envoi…', ok: 'Fait — nous vous recontacterons.', fail: "Impossible d'envoyer — réessayez bientôt." },
+  }[lang];
+
+  let leadPromptShown = false;
+  function showChatLeadPrompt() {
+    const div = document.createElement('div');
+    div.className = 'msg bot-m lead-inline';
+    div.innerHTML = `${leadStrings.prompt}`
+      + `<div class="lead-row"><input type="email" id="chat-lead-email" placeholder="${leadStrings.placeholder}">`
+      + '<input type="text" id="chat-lead-hp" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;">'
+      + `<button id="chat-lead-send">${leadStrings.send}</button></div>`
+      + '<span class="lead-status" id="chat-lead-status"></span>';
+    botThread.appendChild(div);
+    botThread.scrollTop = botThread.scrollHeight;
+    const emailEl = div.querySelector('#chat-lead-email');
+    const hpEl = div.querySelector('#chat-lead-hp');
+    const statusEl = div.querySelector('#chat-lead-status');
+    div.querySelector('#chat-lead-send').addEventListener('click', async () => {
+      const email = emailEl.value.trim();
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        statusEl.textContent = leadStrings.invalid;
+        return;
+      }
+      statusEl.textContent = leadStrings.sending;
+      try {
+        const res = await fetch('/api/lead', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, source: 'chat', lang, hp: hpEl.value, context: { transcript: chatHistory.slice(-6) } }),
+        });
+        statusEl.textContent = res.ok ? leadStrings.ok : leadStrings.fail;
+      } catch {
+        statusEl.textContent = leadStrings.fail;
+      }
+    });
+  }
+
   window.sendChat = async function sendChat(text) {
     if (!text) return;
     bot.classList.add('open');
@@ -126,6 +165,10 @@ if (bot) {
       if (!res.ok) throw new Error(data.error || 'Chat failed');
       addMsg('assistant', data.reply);
       chatHistory.push({ role: 'assistant', text: data.reply });
+      if (!leadPromptShown && chatHistory.filter(m => m.role === 'assistant').length >= 3) {
+        leadPromptShown = true;
+        showChatLeadPrompt();
+      }
     } catch (err) {
       thinking.remove();
       addMsg('assistant', strings.error);

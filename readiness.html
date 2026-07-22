@@ -64,6 +64,15 @@
         </div>
         <p class="diag-body" id="result-body"></p>
         <p style="margin-top:24px;"><a href="services.html" class="btn btn-primary">See services that match →</a> &nbsp; <a href="contact.html" class="btn btn-ghost">Talk to us</a></p>
+        <div class="lead-capture" id="lead-capture">
+          <p class="lead-prompt">Want this sent to you, or want Ankit or Alex to follow up directly?</p>
+          <div class="iv-inputrow" style="max-width:420px;">
+            <input type="email" id="lead-email" placeholder="you@company.com" autocomplete="email">
+            <input type="text" id="lead-hp" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;">
+            <button id="lead-send">Send my read</button>
+          </div>
+          <p class="lead-status" id="lead-status"></p>
+        </div>
       </div>
     </div>
   </div>
@@ -144,6 +153,8 @@ function submitAnswer(text) {
 document.getElementById('iv-send').addEventListener('click', () => submitAnswer(inputEl.value.trim()));
 inputEl.addEventListener('keydown', (e) => { if (e.key === 'Enter') submitAnswer(inputEl.value.trim()); });
 
+let lastResult = null;
+
 async function runDiagnostic() {
   liveEl.style.display = 'none';
   loadingEl.style.display = 'block';
@@ -164,11 +175,40 @@ async function runDiagnostic() {
       requestAnimationFrame(() => { document.getElementById(`dim-${i}`).style.width = v + '%'; });
     });
     resultEl.classList.add('show');
+    lastResult = data;
   } catch (err) {
     loadingEl.textContent = "Couldn't reach the diagnostic engine — please try again shortly.";
     loadingEl.style.display = 'block';
   }
 }
+
+const leadEmailEl = document.getElementById('lead-email');
+const leadHpEl = document.getElementById('lead-hp');
+const leadStatusEl = document.getElementById('lead-status');
+document.getElementById('lead-send').addEventListener('click', async () => {
+  const email = leadEmailEl.value.trim();
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    leadStatusEl.textContent = 'Enter a valid email address.';
+    return;
+  }
+  leadStatusEl.textContent = 'Sending…';
+  try {
+    const res = await fetch('/api/lead', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        email,
+        source: 'quiz',
+        lang: 'en',
+        hp: leadHpEl.value,
+        context: { headline: lastResult?.headline, scores: lastResult?.scores, answers },
+      }),
+    });
+    leadStatusEl.textContent = res.ok ? "Done — we'll follow up." : "Couldn't send that — try again shortly.";
+  } catch {
+    leadStatusEl.textContent = "Couldn't send that — try again shortly.";
+  }
+});
+
 renderQuestion();
 </script>
 </body>
