@@ -195,6 +195,8 @@ nav.floatnav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display
 .credmarq:hover .credtrack { animation-play-state: paused; }
 @keyframes marq { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 .lg-item img { height: 40px; width: auto; max-width: 200px; object-fit: contain; filter: grayscale(1); opacity: .75; transition: all .2s; }
+.lg-item img[src*="logo-faro"] { opacity: .5; }
+.lg-item:hover img[src*="logo-faro"] { opacity: 1; }
 .lg-item:hover img { filter: grayscale(0); opacity: 1; }
 .lg-item .lg-word { font-family: var(--font-display); font-weight: 600; font-size: 22px; letter-spacing: -0.01em; color: var(--ink-soft); opacity: .8; transition: all .2s; white-space: nowrap; }
 .lg-item:hover .lg-word { color: var(--primary); opacity: 1; }
