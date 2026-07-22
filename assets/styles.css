@@ -166,7 +166,7 @@ nav.floatnav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display
 .ask-chip:hover { background: var(--primary); color: #fff; transform: translateY(-2px); }
 
 /* ---------- credibility strip + marquee ---------- */
-.cred-inner { display: flex; flex-direction: column; align-items: center; gap: 18px; text-align: center; }
+.cred-inner { display: flex; flex-direction: column; align-items: center; gap: 40px; text-align: center; }
 .cred-line { font-size: 15px; font-weight: 600; color: var(--ink-soft); letter-spacing: -0.005em; }
 .cred-line b { color: var(--primary); font-weight: 700; }
 .credmarq { width: 100%; overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); }
