@@ -361,6 +361,15 @@ nav.floatnav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display
 .founder-card p { font-size: 14.5px; color: var(--ink-soft); line-height: 1.65; margin-bottom: 10px; }
 @media (max-width: 860px) { .founders-grid { grid-template-columns: 1fr; } }
 
+/* ---------- honors + press mentions ---------- */
+.honors { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+.honor-chip { font-size: 12.5px; font-weight: 600; color: var(--ink-soft); background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-pill); padding: 7px 14px; }
+.press-row { display: flex; align-items: center; gap: 22px; margin-top: 32px; flex-wrap: wrap; }
+.press-label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--ink-muted); flex-shrink: 0; }
+.press-logos { display: flex; align-items: center; gap: 28px; flex-wrap: wrap; }
+.press-logos img { height: 22px; width: auto; max-width: 120px; object-fit: contain; filter: grayscale(1); opacity: .7; transition: opacity .2s; }
+.press-logos img:hover { opacity: 1; }
+
 /* ---------- timeline (year / rail / card) ---------- */
 .timeline { position: relative; margin-top: 44px; }
 .timeline-step { display: grid; grid-template-columns: 112px 34px 1fr; align-items: start; }
