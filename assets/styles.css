@@ -223,18 +223,21 @@ nav.floatnav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display
 @media (max-width: 760px) { .grid-2 { grid-template-columns: 1fr; } }
 
 /* ---------- method / journey steps (4-up numbered) ---------- */
-.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 48px; }
-.step { background: #fff; border-radius: var(--r-lg); padding: 28px 24px; box-shadow: var(--shadow-sm); border-top: 3px solid var(--accent); position: relative; }
+.grid-4 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; margin-top: 48px; }
+.step { background: #fff; border-radius: var(--r-lg); padding: 28px 22px; box-shadow: var(--shadow-sm); border-top: 3px solid var(--accent); position: relative; }
 .step .step-n { font-family: var(--font-display); font-weight: 600; font-size: 30px; color: color-mix(in srgb, var(--accent) 30%, transparent); margin-bottom: 10px; }
 .step h3 { font-family: var(--font-display); font-weight: 600; font-size: 19px; color: var(--primary); margin-bottom: 8px; }
 .step p { font-size: 14px; color: var(--ink-soft); line-height: 1.55; }
-.grid-4 .step:nth-of-type(4n+2) { border-top-color: var(--link); }
-.grid-4 .step:nth-of-type(4n+2) .step-n { color: color-mix(in srgb, var(--link) 35%, transparent); }
-.grid-4 .step:nth-of-type(4n+3) { border-top-color: var(--secondary); }
-.grid-4 .step:nth-of-type(4n+3) .step-n { color: color-mix(in srgb, var(--secondary) 35%, transparent); }
-.grid-4 .step:nth-of-type(4n) { border-top-color: var(--accent); }
-@media (max-width: 900px) { .grid-4 { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 560px) { .grid-4 { grid-template-columns: 1fr; } }
+.grid-4 .step:nth-of-type(2) { border-top-color: var(--link); }
+.grid-4 .step:nth-of-type(2) .step-n { color: color-mix(in srgb, var(--link) 35%, transparent); }
+.grid-4 .step:nth-of-type(3) { border-top-color: var(--secondary); }
+.grid-4 .step:nth-of-type(3) .step-n { color: color-mix(in srgb, var(--secondary) 35%, transparent); }
+.grid-4 .step:nth-of-type(4) { border-top-color: var(--accent); }
+.grid-4 .step:nth-of-type(5) { border-top-color: var(--link); }
+.grid-4 .step:nth-of-type(5) .step-n { color: color-mix(in srgb, var(--link) 35%, transparent); }
+@media (max-width: 1100px) { .grid-4 { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 700px) { .grid-4 { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 460px) { .grid-4 { grid-template-columns: 1fr; } }
 
 /* ---------- FAQ accordion (native <details>, no JS needed) ---------- */
 .faq-list { max-width: 760px; margin-top: 40px; }
