@@ -28,11 +28,20 @@
   </div>
 </nav>
 
-<header class="pagehead">
+<header class="pagehead glow">
+  <canvas id="field" aria-hidden="true"></canvas>
   <div class="wrap">
     <p class="eyebrow reveal">Bilan de préparation</p>
+    <svg class="squiggle reveal" viewBox="0 0 140 16" aria-hidden="true"><path d="M2 8c8-8 16 8 24 0s16-8 24 0 16 8 24 0 16-8 24 0 16 8 24 0"/></svg>
     <h1 class="display reveal">Quatre questions. <em>Aucun courriel.</em></h1>
     <p class="ch-sub reveal" style="margin-left:auto;margin-right:auto;text-align:center;">Une courte entrevue, pas un formulaire — répondez dans vos propres mots si vous le souhaitez. On vous donne un bilan honnête, généré par l'IA, de votre niveau d'adoption réel.</p>
+    <div class="quiz-stats reveal">
+      <div><strong>4</strong><span>Questions</span></div>
+      <div class="qs-div"></div>
+      <div><strong>~2 min</strong><span>Pour compléter</span></div>
+      <div class="qs-div"></div>
+      <div><strong>Instantané</strong><span>Bilan généré par l'IA</span></div>
+    </div>
     <div class="stage-dots reveal" id="stage-dots" style="justify-content:center;"><span class="sd"></span><span class="sd"></span><span class="sd"></span><span class="sd"></span></div>
   </div>
 </header>
